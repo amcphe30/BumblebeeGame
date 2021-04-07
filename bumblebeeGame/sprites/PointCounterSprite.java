@@ -20,7 +20,7 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 			try {				
 				image = new Image[FRAMES];
 				for (int i = 0; i < FRAMES; i++) {
-					String path = String.format("res/pixel_font-%d.png", i);
+					String path = String.format("res/pixel_font/pixel_font-%02d.png", i);
 					image[i] = ImageIO.read(new File(path));
 				}
 			}

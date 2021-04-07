@@ -8,26 +8,29 @@ import javax.imageio.ImageIO;
 
 public class PrintMessage {
 	
-	private Image[] image = null;
-	private final int FRAMES = 51;
-	private int height = 0;
-	private int totalWidth = 0;
+	private static Image[] image = null;
+	private final static int FRAMES = 51;
+	private int height = 50;
+	private static int width = 50;
+	private static int totalWidth = 50;
+	private static String[] messageArray = null;
 	
-	public PrintMessage(String message, int x, int y, int size) {
+	public static void printMessage(String message, int x, int y, int size) {
 		
 		if (image == null) {
 			setImages();
 		}
-		
-		int width = totalWidth / message.length();
+			
+		messageArray = message.split("");	
+		width = totalWidth / message.length();
 		
 	}
 	
-	public void setImages() {
+	public static void setImages() {
 		try {				
 			image = new Image[FRAMES];
 			for (int i = 0; i < FRAMES; i++) {
-				String path = String.format("res/pixel_font-%d.png", i);
+				String path = String.format("res/pixel_font-%02d.png", i);
 				image[i] = ImageIO.read(new File(path));
 			}
 		}
@@ -141,5 +144,4 @@ public class PrintMessage {
 		}		
 		return index;
 	}
-
 }
