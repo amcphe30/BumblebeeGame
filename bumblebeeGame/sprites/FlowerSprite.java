@@ -6,11 +6,13 @@ import javax.imageio.ImageIO;
 
 public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	
+	private static final int MAX = 300;
+	private static final int MIN = -300;
 	private static Image image = null;
-	private double centerX = 100;
-	private double centerY = 0;
-	private double width = 50;
-	private double height = 50;
+	private double centerX = randomInt(MIN, MAX);
+	private double centerY = randomInt(MIN, MAX);
+	private double width = 80;
+	private double height = 80;
 	private boolean visible = true;
 	private static boolean pollinated = false;
 	
@@ -59,19 +61,19 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public double getMinX() {
-		return centerX - (getWidth() / 2);
+		return centerX - (width / 2);
 	}
 
 	public double getMaxX() {
-		return centerX + (getWidth() / 2);
+		return centerX + (width / 2);
 	}
 
 	public double getMinY() {
-		return centerY - (getHeight() / 2);
+		return centerY - (height / 2);
 	}
 
 	public double getMaxY() {
-		return centerY + (getHeight() / 2);
+		return centerY + (height / 2);
 	}
 
 	public double getHeight() {
@@ -93,14 +95,27 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	public boolean getDispose() {
 		return false;
 	}
+	
+	public static int randomInt(int min, int max) {
+		int randomNum = min + (int)(Math.random() * ((max - min) + 1));
+		return randomNum;
+	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
 	}
 
-	public static void setPollination(boolean b) {
-		pollinated = b;
-		
+	public static void setPollination(boolean x) {
+		pollinated = x;
+		if (pollinated == true) {
+			pollinated = false;
+			getNextFlower();
+		}		
+	}
+	
+	public static void getNextFlower() {
+		centerX = randomInt(MIN, MAX);
+		centerY = randomInt(MIN, MAX);
 	}
 
 }

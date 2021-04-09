@@ -176,7 +176,7 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 				}
 			} else if (instance == "FlowerSprite") {
 				if (sprite instanceof FlowerSprite) {
-					if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+					if (CollisionDetection.inside(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 							this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 							sprite.getMinX(),sprite.getMinY(), 
 							sprite.getMaxX(), sprite.getMaxY()) && FlowerSprite.getPollination() == false) {

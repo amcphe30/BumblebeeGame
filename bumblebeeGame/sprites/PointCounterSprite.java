@@ -7,9 +7,9 @@ import javax.imageio.ImageIO;
 public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 	
 	private static Image[] image = null;
-	private static final int FRAMES = 3;
-	private double centerX = 0;
-	private double centerY = 100;
+	private static final int FRAMES = 49;
+	private double centerX = 450;
+	private double centerY = -330;
 	private double width = 50;
 	private double height = 50;
 	private boolean visible = true;
@@ -52,9 +52,10 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 
 	public Image getImage() {
 		int points = APMSprite.getPoints();
-		if (points > 2) {
-			points = 2;
+		if (points > 9) {
+			points = 9;
 		}
+		points += 26; // first 26 is alphabet
 		return image[points];
 	}
 
@@ -63,19 +64,19 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public double getMinX() {
-		return centerX - (getWidth() / 2);
+		return centerX - (width / 2);
 	}
 
 	public double getMaxX() {
-		return centerX + (getWidth() / 2);
+		return centerX + (width / 2);
 	}
 
 	public double getMinY() {
-		return centerY - (getHeight() / 2);
+		return centerY - (height / 2);
 	}
 
 	public double getMaxY() {
-		return centerY + (getHeight() / 2);
+		return centerY + (height / 2);
 	}
 
 	public double getHeight() {

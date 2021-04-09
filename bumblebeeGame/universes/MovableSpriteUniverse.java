@@ -8,7 +8,6 @@ public class MovableSpriteUniverse implements Universe {
 	private DisplayableSprite ground = null;
 	private DisplayableSprite flower = null;
 	private DisplayableSprite points = null;
-	private DisplayableSprite message = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
 	private long elapsedTime = 0;
 	private String status = "";
@@ -28,12 +27,10 @@ public class MovableSpriteUniverse implements Universe {
 	ground = new GroundSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / 2 - 16, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true);
 	flower = new FlowerSprite();
 	points = new PointCounterSprite();
-	message = new MessageTest();
 	sprites.add(player1);
 	sprites.add(ground);
 	sprites.add(flower);
 	sprites.add(points);
-	sprites.add(message);
 	
 }
 	
@@ -72,6 +69,10 @@ public class MovableSpriteUniverse implements Universe {
 	
 	public DisplayableSprite getGround() {
 		return ground;
+	}
+	
+	public DisplayableSprite getFlower() {
+		return flower;
 	}
 
 	public ArrayList<DisplayableSprite> getSprites() {
@@ -120,6 +121,6 @@ public class MovableSpriteUniverse implements Universe {
 	
 	public String toString() {
 		return this.status;
-	}	
+	}
 
 }
