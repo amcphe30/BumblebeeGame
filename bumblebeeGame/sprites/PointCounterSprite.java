@@ -12,7 +12,7 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 	private double centerY = -330;
 	private double width = 50;
 	private double height = 50;
-	private boolean visible = true;
+	private boolean visible = false;
 	
 	public PointCounterSprite() {
 		
@@ -52,8 +52,8 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 
 	public Image getImage() {
 		int points = APMSprite.getPoints();
-		if (points > 9) {
-			points = 9;
+		while (points > 9) {
+			points -= 10;
 		}
 		points += 26; // first 26 is alphabet
 		return image[points];

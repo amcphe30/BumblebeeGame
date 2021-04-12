@@ -6,11 +6,12 @@ import javax.imageio.ImageIO;
 
 public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	
-	private static final int MAX = 300;
-	private static final int MIN = -300;
+	//private static final int MAX = 300;
+	//private static final int MIN_Y = -300;
+	//private static final int MIN_X = 0;
 	private static Image image = null;
-	private double centerX = randomInt(MIN, MAX);
-	private double centerY = randomInt(MIN, MAX);
+	private double centerX = randomInt(0, 300);
+	private double centerY = randomInt(-300, 300);
 	private double width = 80;
 	private double height = 80;
 	private boolean visible = true;
@@ -26,6 +27,7 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 				System.out.println(e.toString());
 			}
 		}
+		
 	}
 	
 	public static boolean getPollination() {
@@ -61,19 +63,19 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public double getMinX() {
-		return centerX - (width / 2);
+		return getCenterX() - (width / 2);
 	}
 
 	public double getMaxX() {
-		return centerX + (width / 2);
+		return getCenterX() + (width / 2);
 	}
 
 	public double getMinY() {
-		return centerY - (height / 2);
+		return getCenterY() - (height / 2);
 	}
 
 	public double getMaxY() {
-		return centerY + (height / 2);
+		return getCenterY() + (height / 2);
 	}
 
 	public double getHeight() {
@@ -103,19 +105,45 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
+		if (checkCollision(universe, "Player1") == true) {
+			APMSprite.addPoint();
+			pollinated = true;
+			getNextFlower();
+		}
 	}
 
 	public static void setPollination(boolean x) {
 		pollinated = x;
 		if (pollinated == true) {
 			pollinated = false;
-			getNextFlower();
 		}		
 	}
 	
-	public static void getNextFlower() {
-		centerX = randomInt(MIN, MAX);
-		centerY = randomInt(MIN, MAX);
+	public void getNextFlower() {
+		centerX = randomInt(0, 300);
+		centerY = randomInt(-300, 300);
+		pollinated = false;
+	}
+	
+public boolean checkCollision(Universe sprites, String instance) {
+		
+		boolean colliding = false;
+		
+		for (DisplayableSprite sprite : sprites.getSprites()) {
+
+			if (instance == "Player1") {
+				if (sprite instanceof APMSprite) {
+					if (CollisionDetection.overlaps(this.getMinX(), this.getMinY(), 
+							this.getMaxX(), this.getMaxY(), 
+							sprite.getMinX(),sprite.getMinY(), 
+							sprite.getMaxX(), sprite.getMaxY()) && getPollination() == false) {
+						colliding = true;
+						break;					
+					}
+				}
+			}	
+		}
+		return colliding;		
 	}
 
 }

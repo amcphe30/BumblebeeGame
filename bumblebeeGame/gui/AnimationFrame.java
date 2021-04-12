@@ -47,11 +47,7 @@ public class AnimationFrame extends JFrame {
 	//local (and direct references to various objects in universe ... should reduce lag by avoiding dynamic lookup
 	private Animation animation = null;
 	private DisplayableSprite player1 = null;
-	private DisplayableSprite flower0 = null;
-	private DisplayableSprite flower1 = null;
-	private DisplayableSprite flower2 = null;
-	private DisplayableSprite flower3 = null;
-	private DisplayableSprite flower4 = null;
+	private DisplayableSprite flower = null;
 	private ArrayList<DisplayableSprite> sprites = null;
 	private Background background = null;
 	boolean centreOnPlayer = false;
@@ -121,14 +117,14 @@ public class AnimationFrame extends JFrame {
 		getContentPane().add(lblTime);
 		getContentPane().setComponentZOrder(lblTime, 0);
 
-		lblLevelLabel = new JLabel("Level: ");
+		lblLevelLabel = new JLabel("Points: ");
 		lblLevelLabel.setForeground(Color.YELLOW);
 		lblLevelLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblLevelLabel.setBounds(528, 22, 128, 30);
 		getContentPane().add(lblLevelLabel);
 		getContentPane().setComponentZOrder(lblLevelLabel, 0);
 
-		lblLevel = new JLabel("1");
+		lblLevel = new JLabel("000");
 		lblLevel.setForeground(Color.YELLOW);
 		lblLevel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblLevel.setBounds(672, 22, 48, 30);
@@ -168,7 +164,7 @@ public class AnimationFrame extends JFrame {
 
 			sprites = universe.getSprites();
 			player1 = universe.getPlayer1();
-			flower0 = universe.getFlower();
+			flower = universe.getFlower();
 			background = universe.getBackground();
 			centreOnPlayer = universe.centerOnPlayer();
 			this.scale = universe.getScale();
@@ -223,7 +219,7 @@ public class AnimationFrame extends JFrame {
 
 	private void updateControls() {
 		this.lblTime.setText(Long.toString(elapsed_time));
-		this.lblLevel.setText(Integer.toString(universeLevel));
+		this.lblLevel.setText(String.valueOf(APMSprite.getPoints()));
 		if (universe != null) {
 			this.lblStatus.setText(universe.toString());
 		}
@@ -275,7 +271,8 @@ public class AnimationFrame extends JFrame {
 
 			if (player1 != null && centreOnPlayer) {
 				xCenter = player1.getCenterX();
-				yCenter = player1.getCenterY();     
+				//yCenter = player1.getCenterY();   
+				//xCenter += 2;
 			}
 
 			paintBackground(g, background);

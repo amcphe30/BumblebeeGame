@@ -80,7 +80,7 @@ public class MovableSpriteUniverse implements Universe {
 	}
 		
 	public boolean centerOnPlayer() {
-		return false;
+		return true;
 	}		
 	
 	public void update(KeyboardInput keyboard, long actual_delta_time) {
