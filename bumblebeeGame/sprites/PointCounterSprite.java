@@ -12,7 +12,7 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 	private double centerY = -330;
 	private double width = 50;
 	private double height = 50;
-	private boolean visible = false;
+	private boolean visible = true;
 	
 	public PointCounterSprite() {
 		

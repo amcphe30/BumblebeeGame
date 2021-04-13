@@ -2,9 +2,10 @@ import java.util.ArrayList;
 
 public class MovableSpriteUniverse implements Universe {
 
-	private boolean complete = false;	
+	private boolean complete = false;
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
+	private DisplayableSprite hornet = null;
 	private DisplayableSprite ground = null;
 	private DisplayableSprite flower = null;
 	private DisplayableSprite points = null;
@@ -24,10 +25,12 @@ public class MovableSpriteUniverse implements Universe {
 	this.setYCenter(0);
 	background = new Background0();
 	player1 = new APMSprite();
+	hornet = new HornetSprite();
 	ground = new GroundSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / 2 - 16, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true);
 	flower = new FlowerSprite();
 	points = new PointCounterSprite();
 	sprites.add(player1);
+	sprites.add(hornet);
 	sprites.add(ground);
 	sprites.add(flower);
 	sprites.add(points);
@@ -67,6 +70,10 @@ public class MovableSpriteUniverse implements Universe {
 		return player1;
 	}
 	
+	public DisplayableSprite getHornet() {
+		return hornet;
+	}
+	
 	public DisplayableSprite getGround() {
 		return ground;
 	}
@@ -80,7 +87,7 @@ public class MovableSpriteUniverse implements Universe {
 	}
 		
 	public boolean centerOnPlayer() {
-		return true;
+		return false;
 	}		
 	
 	public void update(KeyboardInput keyboard, long actual_delta_time) {
@@ -103,6 +110,10 @@ public class MovableSpriteUniverse implements Universe {
 		// DOWN
 		if (keyboard.keyDown(40)) {
 			velocityY += VELOCITY;			
+		}
+		// R
+		if (keyboard.keyDown(82)) {
+			APMSprite.setRetry(true);
 		}
 		
 		for (int i = 0; i < sprites.size(); i++) {

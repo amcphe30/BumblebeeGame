@@ -22,6 +22,9 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 	private double velocityY = 0;
 	private int direction = 2; //1 = left; 2 = right
 	private static int points = 0;
+	private boolean gameOver = false;
+	private boolean win = false;
+	private static boolean retry = false;
 	
 	public APMSprite() {
 		super();
@@ -30,12 +33,12 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 			try {				
 				imageLeft = new Image[FRAMES];
 				for (int i = 0; i < FRAMES; i++) {
-					String path = String.format("res/bee_left-%d.png", i);
+					String path = String.format("res/bee/bee_left-%d.png", i);
 					imageLeft[i] = ImageIO.read(new File(path));
 				}
 				imageRight = new Image[FRAMES];
 				for (int i = 0; i < FRAMES; i++) {
-					String path = String.format("res/bee_right-%d.png", i);
+					String path = String.format("res/bee/bee_right-%d.png", i);
 					imageRight[i] = ImageIO.read(new File(path));
 				}
 			}
@@ -63,11 +66,15 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 	}	
 
 	public void moveX(double pixelsPerSecond) {
-		this.velocityX = pixelsPerSecond;
+		if (gameOver == false) {
+			this.velocityX = pixelsPerSecond;
+		}
 	}
 
 	public void moveY(double pixelsPerSecond) {
-		this.velocityY = pixelsPerSecond;
+		if (gameOver == false) {
+			this.velocityY = pixelsPerSecond;
+		}
 	}
 
 	public void stop() {
@@ -151,6 +158,27 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 			centerY += deltaY;
 		}
 		
+		if (checkCollision(universe, "Hornet", 0, deltaY) == true) {
+			gameOver();
+		}
+		
+		HornetSprite.setPlayerX(centerX);
+		HornetSprite.setPlayerY(centerY);
+		
+		if (points == 10) {
+			win = true;
+			gameOver();
+		}
+		
+		if (retry == true) {
+			this.gameOver = false;
+			win = false;
+			points = 0;
+			centerX = 0;
+			centerY = 0;
+			retry = false;
+		}
+		
 	}	
 	
 	
@@ -171,8 +199,43 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 					}
 				}
 			}
+			
+			if (instance == "Hornet") {
+				if (sprite instanceof HornetSprite) {
+					if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+							this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+							sprite.getMinX(),sprite.getMinY(), 
+							sprite.getMaxX(), sprite.getMaxY())) {
+						colliding = true;
+						break;					
+					}
+				}
+			}
 		}
 		return colliding;		
+	}
+	
+	public void gameOver() {
+		gameOver = true;
+		stop();
+		if (win == true) {
+			winAnimation();
+		} else {
+			lossAnimation();
+		}
+			
+	}
+	
+	public void winAnimation() {
+		
+	}
+	
+	public void lossAnimation() {
+		
+	}
+
+	public static void setRetry(boolean b) {
+		retry = b;		
 	}
 }
 
