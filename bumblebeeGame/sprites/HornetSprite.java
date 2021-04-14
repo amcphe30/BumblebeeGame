@@ -13,8 +13,8 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 	private static Image[] imageLeft = null;
 	private static Image[] imageRight = null;
 	private long elapsedTime = 0;
-	private double centerX = -300;
-	private double centerY = -300;
+	private double centerX = -500;
+	private double centerY = -500;
 	private double deltaX = SPEED;
 	private double deltaY = SPEED;
 	private double height = 50;
@@ -136,14 +136,28 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
+		
 		elapsedTime += actual_delta_time;
-		if (centerX < playerX) {
+		
+		double targetX;
+		double targetY;
+		
+		if (APMSprite.gameOver == true) {
+			targetX = -300;
+			targetY = -300;
+		} else {
+			targetX = playerX;
+			targetY = playerY;
+		}
+		
+		
+		if (centerX < targetX) {
 			deltaX = SPEED;
 		} else {
 			deltaX = -SPEED;
 		}
 		
-		if (centerY < playerY) {
+		if (centerY < targetY) {
 			deltaY = SPEED;
 		} else {
 			deltaY = -SPEED;

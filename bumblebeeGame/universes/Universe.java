@@ -24,6 +24,7 @@ public interface Universe {
 	public DisplayableSprite getGround();
 	public DisplayableSprite getFlower();
 	public boolean centerOnPlayer();
+	public boolean gameOver();
 
 	public ArrayList<DisplayableSprite> getSprites();	
 	

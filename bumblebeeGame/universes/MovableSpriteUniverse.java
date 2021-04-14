@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class MovableSpriteUniverse implements Universe {
 
 	private boolean complete = false;
+	private boolean gameOver = false;
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
 	private DisplayableSprite hornet = null;
@@ -88,7 +89,12 @@ public class MovableSpriteUniverse implements Universe {
 		
 	public boolean centerOnPlayer() {
 		return false;
-	}		
+	}	
+	
+	public boolean gameOver() {
+		return gameOver;
+	}
+
 	
 	public void update(KeyboardInput keyboard, long actual_delta_time) {
 

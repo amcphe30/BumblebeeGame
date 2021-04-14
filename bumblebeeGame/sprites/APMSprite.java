@@ -22,7 +22,7 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 	private double velocityY = 0;
 	private int direction = 2; //1 = left; 2 = right
 	private static int points = 0;
-	private boolean gameOver = false;
+	public static boolean gameOver = false;
 	private boolean win = false;
 	private static boolean retry = false;
 	
@@ -171,7 +171,7 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 		}
 		
 		if (retry == true) {
-			this.gameOver = false;
+			gameOver = false;
 			win = false;
 			points = 0;
 			centerX = 0;
