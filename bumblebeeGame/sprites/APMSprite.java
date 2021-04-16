@@ -166,8 +166,8 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 		HornetSprite.setPlayerY(centerY);
 		
 		if (points == 10) {
-			win = true;
-			gameOver();
+			//win = true;
+			//gameOver();
 		}
 		
 		if (retry == true) {

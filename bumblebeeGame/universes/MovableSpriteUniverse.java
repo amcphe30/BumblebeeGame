@@ -7,6 +7,7 @@ public class MovableSpriteUniverse implements Universe {
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
 	private DisplayableSprite hornet = null;
+	private DisplayableSprite hornet2 = null;
 	private DisplayableSprite ground = null;
 	private DisplayableSprite flower = null;
 	private DisplayableSprite points = null;
@@ -28,12 +29,14 @@ public class MovableSpriteUniverse implements Universe {
 	background = new Background0();
 	player1 = new APMSprite();
 	hornet = new HornetSprite();
+	hornet2 = new HornetSprite();
 	ground = new GroundSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / 2 - 16, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true);
 	flower = new FlowerSprite();
 	points = new PointCounterSprite();
 	//imageTest = new ImageDisplayer("blue-barrier", 100, 100, 50, 50);
 	sprites.add(player1);
 	sprites.add(hornet);
+	sprites.add(hornet2);
 	sprites.add(ground);
 	sprites.add(flower);
 	sprites.add(points);

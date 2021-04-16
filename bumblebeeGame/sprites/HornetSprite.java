@@ -13,8 +13,9 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 	private static Image[] imageLeft = null;
 	private static Image[] imageRight = null;
 	private long elapsedTime = 0;
-	private double centerX = -500;
-	private double centerY = -500;
+	private double centerX = randomInt(-500, -600);
+	private double centerY = randomInt(-500, -600);
+	private int randNum = randomInt(10, 0);
 	private double deltaX = SPEED;
 	private double deltaY = SPEED;
 	private double height = 50;
@@ -63,7 +64,7 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public void stop() {
-
+		
 	}
 
 	public Image getImage() {
@@ -134,6 +135,12 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 	public static void setPlayerY(double y) {
 		playerY = y;
 	}
+	
+	public static int randomInt(int min, int max) {
+		int randomNum = min + (int)(Math.random() * ((max - min) + 1));
+		return randomNum;
+	}
+
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
@@ -151,16 +158,18 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 		}
 		
 		
-		if (centerX < targetX) {
-			deltaX = SPEED;
-		} else {
-			deltaX = -SPEED;
-		}
+		if (elapsedTime % randNum == 0)	 {
+			if (centerX < targetX) {
+				deltaX = SPEED;
+			} else {
+				deltaX = -SPEED;
+			}
 		
-		if (centerY < targetY) {
-			deltaY = SPEED;
-		} else {
-			deltaY = -SPEED;
+			if (centerY < targetY) {
+				deltaY = SPEED;
+			} else {
+				deltaY = -SPEED;
+			}
 		}
 		
 		centerX += deltaX;
