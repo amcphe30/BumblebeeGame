@@ -7,26 +7,30 @@ import javax.imageio.ImageIO;
 public class HornetSprite implements DisplayableSprite, MovableSprite {
 
 	private static final int FRAMES = 9;
-	private static final double SPEED = 1.5;
+	private double speed = 1.5;
 	private static int framesPerSecond = 20;
 	private static int millisecondsPerFrame = 1000 / framesPerSecond;
 	private static Image[] imageLeft = null;
 	private static Image[] imageRight = null;
 	private long elapsedTime = 0;
-	private double centerX = randomInt(-500, -600);
-	private double centerY = randomInt(-500, -600);
+	private double centerX = randomInt(-400, -450);
+	private double centerY = randomInt(-400, -450);
 	private int randNum = randomInt(10, 0);
-	private double deltaX = SPEED;
-	private double deltaY = SPEED;
+	private double deltaX = speed;
+	private double deltaY = speed;
 	private double height = 50;
 	private double width = 50;
 	private int direction = 2; //1 = left; 2 = right
 	private static double playerX = 0;
 	private static double playerY = 0;
+	private boolean angry = false;
+	private int minPoints = 0;
 	
-	public HornetSprite() {
+	public HornetSprite(int minPoints, double speed) {
 		super();
-
+		this.minPoints = minPoints;
+		this.speed = speed;
+		
 		if (imageLeft == null) {
 			try {				
 				imageLeft = new Image[FRAMES];
@@ -140,6 +144,17 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 		int randomNum = min + (int)(Math.random() * ((max - min) + 1));
 		return randomNum;
 	}
+	
+	public boolean isAngry() {
+		int points = BeeSprite.getPoints();
+		if (points > minPoints || points == minPoints) {
+			angry = true;
+		} else {
+			angry = false;
+		}
+		
+		return angry;
+	}
 
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
@@ -149,32 +164,33 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 		double targetX;
 		double targetY;
 		
-		if (APMSprite.gameOver == true) {
+		if (BeeSprite.gameOver == true) {
 			targetX = -300;
 			targetY = -300;
 		} else {
 			targetX = playerX;
 			targetY = playerY;
 		}
-		
-		
+				
 		if (elapsedTime % randNum == 0)	 {
 			if (centerX < targetX) {
-				deltaX = SPEED;
+				deltaX = speed;
 			} else {
-				deltaX = -SPEED;
+				deltaX = -speed;
 			}
 		
 			if (centerY < targetY) {
-				deltaY = SPEED;
+				deltaY = speed;
 			} else {
-				deltaY = -SPEED;
+				deltaY = -speed;
 			}
 		}
 		
-		centerX += deltaX;
-		centerY += deltaY;
-		
+		if (isAngry() == true) {
+			centerX += deltaX;
+			centerY += deltaY;
+		}		
+
 	}
 
 }

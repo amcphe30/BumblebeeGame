@@ -106,7 +106,7 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
 		if (checkCollision(universe, "Player1") == true) {
-			APMSprite.addPoint();
+			BeeSprite.addPoint();
 			pollinated = true;
 			getNextFlower();
 		}
@@ -132,7 +132,7 @@ public boolean checkCollision(Universe sprites, String instance) {
 		for (DisplayableSprite sprite : sprites.getSprites()) {
 
 			if (instance == "Player1") {
-				if (sprite instanceof APMSprite) {
+				if (sprite instanceof BeeSprite) {
 					if (CollisionDetection.overlaps(this.getMinX(), this.getMinY(), 
 							this.getMaxX(), this.getMaxY(), 
 							sprite.getMinX(),sprite.getMinY(), 

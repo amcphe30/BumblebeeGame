@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class APMSprite implements DisplayableSprite, MovableSprite {
+public class BeeSprite implements DisplayableSprite, MovableSprite {
 
 	private static final int FRAMES = 9;
 	private static int framesPerSecond = 20;
@@ -23,10 +23,10 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 	private int direction = 2; //1 = left; 2 = right
 	private static int points = 0;
 	public static boolean gameOver = false;
-	private boolean win = false;
+	private boolean loss = false;
 	private static boolean retry = false;
 	
-	public APMSprite() {
+	public BeeSprite() {
 		super();
 
 		if (imageLeft == null) {
@@ -165,14 +165,9 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 		HornetSprite.setPlayerX(centerX);
 		HornetSprite.setPlayerY(centerY);
 		
-		if (points == 10) {
-			//win = true;
-			//gameOver();
-		}
-		
 		if (retry == true) {
 			gameOver = false;
-			win = false;
+			loss = false;
 			points = 0;
 			centerX = 0;
 			centerY = 0;
@@ -218,19 +213,19 @@ public class APMSprite implements DisplayableSprite, MovableSprite {
 	public void gameOver() {
 		gameOver = true;
 		stop();
-		if (win == true) {
-			winAnimation();
-		} else {
+		if (loss == true) {
 			lossAnimation();
+		} else {
+			//lossAnimation();
 		}
 			
 	}
 	
-	public void winAnimation() {
+	public void lossAnimation() {
 		
 	}
 	
-	public void lossAnimation() {
+	public void highScoreAnimation() {
 		
 	}
 

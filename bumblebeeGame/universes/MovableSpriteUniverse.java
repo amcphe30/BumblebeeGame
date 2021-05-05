@@ -27,9 +27,9 @@ public class MovableSpriteUniverse implements Universe {
 	this.setXCenter(0);
 	this.setYCenter(0);
 	background = new Background0();
-	player1 = new APMSprite();
-	hornet = new HornetSprite();
-	hornet2 = new HornetSprite();
+	player1 = new BeeSprite();
+	hornet = new HornetSprite(0, 1.5);
+	hornet2 = new HornetSprite(10, 2);
 	ground = new GroundSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / 2 - 16, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true);
 	flower = new FlowerSprite();
 	points = new PointCounterSprite();
@@ -125,7 +125,7 @@ public class MovableSpriteUniverse implements Universe {
 		}
 		// R
 		if (keyboard.keyDown(82)) {
-			APMSprite.setRetry(true);
+			BeeSprite.setRetry(true);
 		}
 		
 		for (int i = 0; i < sprites.size(); i++) {

@@ -225,7 +225,7 @@ public class AnimationFrame extends JFrame {
 
 	private void updateControls() {
 		this.lblTime.setText(Long.toString(elapsed_time));
-		this.lblLevel.setText(String.valueOf(APMSprite.getPoints()));
+		this.lblLevel.setText(String.valueOf(BeeSprite.getPoints()));
 		if (universe != null) {
 			this.lblStatus.setText(universe.toString());
 		}

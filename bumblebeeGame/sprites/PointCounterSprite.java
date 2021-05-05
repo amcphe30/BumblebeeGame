@@ -51,7 +51,7 @@ public class PointCounterSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public Image getImage() {
-		int points = APMSprite.getPoints();
+		int points = BeeSprite.getPoints();
 		while (points > 9) {
 			points -= 10;
 		}
