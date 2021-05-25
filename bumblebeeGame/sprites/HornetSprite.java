@@ -35,12 +35,12 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 			try {				
 				imageLeft = new Image[FRAMES];
 				for (int i = 0; i < FRAMES; i++) {
-					String path = String.format("res/hornet/hornet_left-%d.png", i);
+					String path = String.format("res/hornet/wasp_left-%d.png", i);
 					imageLeft[i] = ImageIO.read(new File(path));
 				}
 				imageRight = new Image[FRAMES];
 				for (int i = 0; i < FRAMES; i++) {
-					String path = String.format("res/hornet/hornet_right-%d.png", i);
+					String path = String.format("res/hornet/wasp_right-%d.png", i);
 					imageRight[i] = ImageIO.read(new File(path));
 				}
 			}

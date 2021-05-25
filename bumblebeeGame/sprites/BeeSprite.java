@@ -27,7 +27,6 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	private boolean loss = false;
 	private static boolean retry = false;
 	private boolean startScreen = false;
-	private static ArrayList<Object> visibleSprites = new ArrayList<Object>();
 	
 	public BeeSprite() {
 		super();
