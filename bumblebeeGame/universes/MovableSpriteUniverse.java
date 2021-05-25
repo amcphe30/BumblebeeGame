@@ -7,11 +7,9 @@ public class MovableSpriteUniverse implements Universe {
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
 	private DisplayableSprite hornet = null;
-	private DisplayableSprite hornet2 = null;
-	private DisplayableSprite ground = null;
 	private DisplayableSprite flower = null;
-	private DisplayableSprite points = null;
-	private DisplayableSprite imageTest = null;
+	private DisplayableSprite cloud_a = null;
+	private DisplayableSprite cloud_b = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
 	private long elapsedTime = 0;
 	private String status = "";
@@ -26,23 +24,21 @@ public class MovableSpriteUniverse implements Universe {
 	
 	this.setXCenter(0);
 	this.setYCenter(0);
-	background = new Background0();
+	background = new MappedBackground();
 	player1 = new BeeSprite();
 	hornet = new HornetSprite(0, 1.5);
-	hornet2 = new HornetSprite(10, 2);
-	ground = new GroundSprite(AnimationFrame.SCREEN_WIDTH / -2,AnimationFrame.SCREEN_HEIGHT / 2 - 16, AnimationFrame.SCREEN_WIDTH / 2, AnimationFrame.SCREEN_HEIGHT / 2, true);
 	flower = new FlowerSprite();
-	points = new PointCounterSprite();
-	//imageTest = new ImageDisplayer("blue-barrier", 100, 100, 50, 50);
+	cloud_a = new CloudSprite(1, -200, -100);
+	cloud_b = new CloudSprite(2, 300, -150);
 	sprites.add(player1);
 	sprites.add(hornet);
-	sprites.add(hornet2);
-	sprites.add(ground);
 	sprites.add(flower);
-	sprites.add(points);
-	//sprites.add(imageTest);
+	sprites.add(cloud_a);
+	sprites.add(cloud_b);
 	
-}
+
+	}
+	
 	
 	public double getScale() {
 		return 1;
@@ -79,10 +75,6 @@ public class MovableSpriteUniverse implements Universe {
 	
 	public DisplayableSprite getHornet() {
 		return hornet;
-	}
-	
-	public DisplayableSprite getGround() {
-		return ground;
 	}
 	
 	public DisplayableSprite getFlower() {

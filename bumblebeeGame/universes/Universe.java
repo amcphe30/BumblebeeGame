@@ -21,7 +21,6 @@ public interface Universe {
 	public Background getBackground();
 	public DisplayableSprite getPlayer1();
 	public DisplayableSprite getHornet();
-	public DisplayableSprite getGround();
 	public DisplayableSprite getFlower();
 	public boolean centerOnPlayer();
 	public boolean gameOver();

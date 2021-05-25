@@ -1,6 +1,7 @@
 import java.awt.Image; 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -25,6 +26,8 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	public static boolean gameOver = false;
 	private boolean loss = false;
 	private static boolean retry = false;
+	private boolean startScreen = false;
+	private static ArrayList<Object> visibleSprites = new ArrayList<Object>();
 	
 	public BeeSprite() {
 		super();
@@ -145,33 +148,35 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
-		elapsedTime += actual_delta_time;
-		//centerX += 2;
+		if (startScreen == true) {
 		
-		deltaX = velocityX * actual_delta_time * 0.001;
-		if (checkCollision(universe, "GroundSprite", deltaX, 0) == false) {
+			
+			
+		} else {
+			
+			elapsedTime += actual_delta_time;
+		
+			deltaX = velocityX * actual_delta_time * 0.001;
 			centerX += deltaX;
-		}
 		
-		deltaY = velocityY * actual_delta_time * 0.001;
-		if (checkCollision(universe, "GroundSprite", 0, deltaY) == false) {
+			deltaY = velocityY * actual_delta_time * 0.001;
 			centerY += deltaY;
-		}
 		
-		if (checkCollision(universe, "Hornet", 0, deltaY) == true) {
-			gameOver();
-		}
+			if (checkCollision(universe, "Hornet", 0, deltaY) == true) {
+				gameOver();
+			}
 		
-		HornetSprite.setPlayerX(centerX);
-		HornetSprite.setPlayerY(centerY);
+			HornetSprite.setPlayerX(centerX);
+			HornetSprite.setPlayerY(centerY);
 		
-		if (retry == true) {
-			gameOver = false;
-			loss = false;
-			points = 0;
-			centerX = 0;
-			centerY = 0;
-			retry = false;
+			if (retry == true) {
+				gameOver = false;
+				loss = false;
+				points = 0;
+				centerX = 0;
+				centerY = 0;
+				retry = false;
+			}
 		}
 		
 	}	
@@ -182,18 +187,6 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		boolean colliding = false;
 		
 		for (DisplayableSprite sprite : sprites.getSprites()) {
-
-			if (instance == "GroundSprite") {
-				if (sprite instanceof GroundSprite) {
-					if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
-							this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
-							sprite.getMinX(),sprite.getMinY(), 
-							sprite.getMaxX(), sprite.getMaxY())) {
-						colliding = true;
-						break;					
-					}
-				}
-			}
 			
 			if (instance == "Hornet") {
 				if (sprite instanceof HornetSprite) {
@@ -219,6 +212,10 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			//lossAnimation();
 		}
 			
+	}
+	
+	public void startAnimation() {
+		
 	}
 	
 	public void lossAnimation() {

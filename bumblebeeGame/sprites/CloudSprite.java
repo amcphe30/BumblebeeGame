@@ -4,61 +4,44 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class GroundSprite implements DisplayableSprite, MovableSprite {
+public class CloudSprite implements DisplayableSprite {
 	
 	private static Image image = null;
+	private static Image cloud_a = null;
+	private static Image cloud_b = null;
 	private double centerX = 0;
 	private double centerY = 0;
-	private double width = 50;
-	private double height = 50;
+	private double width = 300;
+	private double height = 300;
 	private boolean visible = true;
+	private int cloud = 1;
 	
-	public GroundSprite(int minX, int minY, int maxX, int maxY, boolean visible) {
+	public CloudSprite(int cloud, double centerX, double centerY) {
 		
 		if (image == null) {
 			try {
-				image = ImageIO.read(new File("res/background-3-1.png.png"));
+				cloud_a = ImageIO.read(new File("res/cloud-1.png"));
+				cloud_b = ImageIO.read(new File("res/cloud-2.png"));
 			}
 			catch (IOException e) {
 				System.out.println(e.toString());
 			}
 		}
 		
-		this.centerX = (minX + maxX) / 2;
-		this.centerY = (minY + maxY) / 2;
-		this.width = maxX - minX;
-		this.height = maxY - minY;
-		this.visible = visible;
+		this.cloud = cloud;
+		this.centerX = centerX;
+		this.centerY = centerY;
 		
 	}
-
-	
-	public void setCenterX(double centerX) {
-		this.centerX = centerX;
-	}
-
-	
-	public void setCenterY(double centerY) {
-		this.centerY = centerY;
-	}
-
-	
-	public void moveX(double pixelsPerSecond) {		
-		//unimplemented
-	}
-
-	
-	public void moveY(double pixelsPerSecond) {		
-		//unimplemented
-	}
-
-	
-	public void stop() {	
-		//unimplemented
-	}
-
 	
 	public Image getImage() {	
+		
+		if (cloud == 1) {
+			image = cloud_a;
+		} else {
+			image = cloud_b;
+		}
+		
 		return image;
 	}
 
@@ -83,12 +66,10 @@ public class GroundSprite implements DisplayableSprite, MovableSprite {
 	}
 
 	public double getHeight() {
-		height = image.getHeight(null);
 		return height;
 	}
 
 	public double getWidth() {
-		width = image.getWidth(null);
 		return width;
 	}
 
