@@ -165,8 +165,8 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 				gameOver();
 			}
 		
-			HornetSprite.setPlayerX(centerX);
-			HornetSprite.setPlayerY(centerY);
+			WaspSprite.setPlayerX(centerX);
+			WaspSprite.setPlayerY(centerY);
 		
 			if (retry == true) {
 				gameOver = false;
@@ -188,7 +188,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		for (DisplayableSprite sprite : sprites.getSprites()) {
 			
 			if (instance == "Hornet") {
-				if (sprite instanceof HornetSprite) {
+				if (sprite instanceof WaspSprite) {
 					if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 							this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
 							sprite.getMinX(),sprite.getMinY(), 
@@ -204,6 +204,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	
 	public void gameOver() {
 		gameOver = true;
+		Highscores.addNewHighscore("name", getPoints());
 		stop();
 		if (loss == true) {
 			lossAnimation();

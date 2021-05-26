@@ -11,7 +11,7 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	//private static final int MIN_X = 0;
 	private static Image image = null;
 	private double centerX = randomInt(0, 300);
-	private double centerY = randomInt(-300, 300);
+	private double centerY = randomInt(-300, 200);
 	private double width = 80;
 	private double height = 80;
 	private boolean visible = true;

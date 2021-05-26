@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class HornetSprite implements DisplayableSprite, MovableSprite {
+public class WaspSprite implements DisplayableSprite, MovableSprite {
 
 	private static final int FRAMES = 9;
 	private double speed = 1.5;
@@ -26,7 +26,7 @@ public class HornetSprite implements DisplayableSprite, MovableSprite {
 	private boolean angry = false;
 	private int minPoints = 0;
 	
-	public HornetSprite(int minPoints, double speed) {
+	public WaspSprite(int minPoints, double speed) {
 		super();
 		this.minPoints = minPoints;
 		this.speed = speed;

@@ -6,7 +6,7 @@ public class MovableSpriteUniverse implements Universe {
 	private boolean gameOver = false;
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
-	private DisplayableSprite hornet = null;
+	private DisplayableSprite wasp = null;
 	private DisplayableSprite flower = null;
 	private DisplayableSprite cloud_a = null;
 	private DisplayableSprite cloud_b = null;
@@ -26,12 +26,12 @@ public class MovableSpriteUniverse implements Universe {
 	this.setYCenter(0);
 	background = new MappedBackground();
 	player1 = new BeeSprite();
-	hornet = new HornetSprite(0, 1.5);
+	wasp = new WaspSprite(0, 1.5);
 	flower = new FlowerSprite();
 	cloud_a = new CloudSprite(1, -200, -100);
 	cloud_b = new CloudSprite(2, 300, -150);
 	sprites.add(player1);
-	sprites.add(hornet);
+	sprites.add(wasp);
 	sprites.add(flower);
 	sprites.add(cloud_a);
 	sprites.add(cloud_b);
@@ -73,8 +73,8 @@ public class MovableSpriteUniverse implements Universe {
 		return player1;
 	}
 	
-	public DisplayableSprite getHornet() {
-		return hornet;
+	public DisplayableSprite getWasp() {
+		return wasp;
 	}
 	
 	public DisplayableSprite getFlower() {
