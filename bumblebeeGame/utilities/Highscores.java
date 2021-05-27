@@ -2,56 +2,75 @@ import java.util.ArrayList;
 
 public class Highscores {
 	
-	private static String[] names = null;
-	private static int[] scores = null;
+	private static ArrayList<String> names = null;
+	private static ArrayList<Integer> scores = null;
+	private final static int MAXSCORES = 5;
+	private static boolean visible = false;
 	
 	public static void initializeArrays() {
 		
 		if (names == null) {
-			names = new String[5];
-			scores = new int[5];
-			for (int i = 0; i < 10; i++) {
-				names[i] = "";
-				scores[i] = 0;
+			names = new ArrayList<String>();
+			scores = new ArrayList<Integer>();
+			for (int i = 0; i < MAXSCORES; i++) {
+				names.add("");
+				scores.add(0);
 			}
 		}
 	}
 	
 	public static void addNewHighscore(String name, int score) {
 		
-		initializeArrays();
+		initializeArrays();		
 		
-		// not done, fix following to shift out lower scores, easier to do with arraylist?
-		// or does the structured length of the array mean regular array is automatically better?
-		
-		
-		for (int i = 0; i < 5; i++) {
-			if (scores[i] < score) {
-				scores[i] = score;
-				names[i] = name;
+		for (int i = 0; i < MAXSCORES; i++) {
+			if (scores.get(i) < score) {
+				scores.add(i, score);
+				scores.remove(MAXSCORES);
+				names.add(i, name);
+				names.remove(MAXSCORES);
 				break;
+			}
 		}
 		
 	}
 	
-	public String[] getNames() {
+	public static String getHighscore(int i) {
+		String name = getName(i);
+		name = String.format("%-10s", name);
+		String score = String.valueOf(getScore(i));
+		score = String.format("%3s", score);
+		
+		String highscore = name + " " + String.valueOf(score);
+		return highscore;
+	}
+	
+	public ArrayList<String> getNames() {
 		initializeArrays();
 		return names;		
 	}
 	
-	public int[] getScores() {
+	public ArrayList<Integer> getScores() {
 		initializeArrays();
 		return scores;
 	}
 	
-	public String getName(int x) {
+	public static String getName(int x) {
 		initializeArrays();
-		return names[x];		
+		return names.get(x);		
 	}
 	
 	public static int getScore(int x) {
 		initializeArrays();
-		return scores[x];
+		return scores.get(x);
+	}
+	
+	public static void setVisible(boolean b) {
+		visible = b;
+	}
+	
+	public static boolean getVisible() {
+		return visible;
 	}
 	
 }

@@ -33,8 +33,8 @@ public class MovableSpriteUniverse implements Universe {
 	sprites.add(player1);
 	sprites.add(wasp);
 	sprites.add(flower);
-	sprites.add(cloud_a);
-	sprites.add(cloud_b);
+	//sprites.add(cloud_a);
+	//sprites.add(cloud_b);
 	
 
 	}

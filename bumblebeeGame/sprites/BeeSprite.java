@@ -147,35 +147,41 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
-		if (startScreen == true) {
+		elapsedTime += actual_delta_time;
 		
+		if (gameOver == false) {
 			
-			
-		} else {
-			
-			elapsedTime += actual_delta_time;
+			Highscores.setVisible(false);
 		
 			deltaX = velocityX * actual_delta_time * 0.001;
 			centerX += deltaX;
 		
 			deltaY = velocityY * actual_delta_time * 0.001;
 			centerY += deltaY;
-		
-			if (checkCollision(universe, "Hornet", 0, deltaY) == true) {
-				gameOver();
+			
+			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
+				stop();
+				gameOver = true;
+				Highscores.addNewHighscore("name", getPoints());
 			}
-		
+			
 			WaspSprite.setPlayerX(centerX);
 			WaspSprite.setPlayerY(centerY);
+			
+		} else {
+			
+			Highscores.setVisible(true);
+			
+		}
 		
-			if (retry == true) {
-				gameOver = false;
-				loss = false;
-				points = 0;
-				centerX = 0;
-				centerY = 0;
-				retry = false;
-			}
+		
+		if (retry == true) {
+			gameOver = false;
+			loss = false;
+			points = 0;
+			centerX = 0;
+			centerY = 0;
+			retry = false;
 		}
 		
 	}	
@@ -187,7 +193,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		for (DisplayableSprite sprite : sprites.getSprites()) {
 			
-			if (instance == "Hornet") {
+			if (instance == "Wasp") {
 				if (sprite instanceof WaspSprite) {
 					if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 							this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
@@ -200,18 +206,6 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			}
 		}
 		return colliding;		
-	}
-	
-	public void gameOver() {
-		gameOver = true;
-		Highscores.addNewHighscore("name", getPoints());
-		stop();
-		if (loss == true) {
-			lossAnimation();
-		} else {
-			//lossAnimation();
-		}
-			
 	}
 	
 	public void startAnimation() {

@@ -34,6 +34,7 @@ public class AnimationFrame extends JFrame {
 	private JLabel lblLevelLabel;
 	private JLabel lblLevel;
 	private JLabel lblStatus;
+	private JLabel username;
 	private JLabel lblFirstPlace;
 	private JLabel lblSecondPlace;
 	private JLabel lblThirdPlace;
@@ -150,38 +151,38 @@ public class AnimationFrame extends JFrame {
 		
 		//highscores
 		
-		lblFirstPlace = new JLabel("x");
+		lblFirstPlace = new JLabel("");
 		lblFirstPlace.setForeground(Color.WHITE);
 		lblFirstPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblFirstPlace.setBounds(300, 300, 36, 36);
+		lblFirstPlace.setBounds(300, 300, 220, 36);
 		getContentPane().add(lblFirstPlace);
 		getContentPane().setComponentZOrder(lblFirstPlace, 0);
 		
-		lblSecondPlace = new JLabel("x");
+		lblSecondPlace = new JLabel("");
 		lblSecondPlace.setForeground(Color.WHITE);
 		lblSecondPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblSecondPlace.setBounds(300, 340, 36, 36);
+		lblSecondPlace.setBounds(300, 340, 220, 36);
 		getContentPane().add(lblSecondPlace);
 		getContentPane().setComponentZOrder(lblSecondPlace, 0);
 		
-		lblThirdPlace = new JLabel("x");
+		lblThirdPlace = new JLabel("");
 		lblThirdPlace.setForeground(Color.WHITE);
 		lblThirdPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblThirdPlace.setBounds(300, 380, 36, 36);
+		lblThirdPlace.setBounds(300, 380, 220, 36);
 		getContentPane().add(lblThirdPlace);
 		getContentPane().setComponentZOrder(lblThirdPlace, 0);
 		
-		lblFourthPlace = new JLabel("x");
+		lblFourthPlace = new JLabel("");
 		lblFourthPlace.setForeground(Color.WHITE);
 		lblFourthPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblFourthPlace.setBounds(300, 420, 36, 36);
+		lblFourthPlace.setBounds(300, 420, 220, 36);
 		getContentPane().add(lblFourthPlace);
 		getContentPane().setComponentZOrder(lblFourthPlace, 0);
 		
-		lblFifthPlace = new JLabel("x");
+		lblFifthPlace = new JLabel("");
 		lblFifthPlace.setForeground(Color.WHITE);
 		lblFifthPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblFifthPlace.setBounds(300, 460, 36, 36);
+		lblFifthPlace.setBounds(300, 460, 220, 36);
 		getContentPane().add(lblFifthPlace);
 		getContentPane().setComponentZOrder(lblFifthPlace, 0);
 
@@ -268,11 +269,21 @@ public class AnimationFrame extends JFrame {
 	private void updateControls() {
 		this.lblTime.setText(Long.toString(elapsed_time));
 		this.lblLevel.setText(String.valueOf(BeeSprite.getPoints()));
-		this.lblFirstPlace.setText(String.valueOf(Highscores.getScore(0)));
-		this.lblSecondPlace.setText(String.valueOf(Highscores.getScore(1)));
-		this.lblThirdPlace.setText(String.valueOf(Highscores.getScore(2)));
-		this.lblFourthPlace.setText(String.valueOf(Highscores.getScore(3)));
-		this.lblFifthPlace.setText(String.valueOf(Highscores.getScore(4)));
+		
+		if (Highscores.getVisible()) {
+			this.lblFirstPlace.setText(Highscores.getHighscore(0));
+			this.lblSecondPlace.setText(Highscores.getHighscore(1));
+			this.lblThirdPlace.setText(Highscores.getHighscore(2));
+			this.lblFourthPlace.setText(Highscores.getHighscore(3));
+			this.lblFifthPlace.setText(Highscores.getHighscore(4));
+		} else {
+			this.lblFirstPlace.setText("");
+			this.lblSecondPlace.setText("");
+			this.lblThirdPlace.setText("");
+			this.lblFourthPlace.setText("");
+			this.lblFifthPlace.setText("");
+		}
+		
 		if (universe != null) {
 			this.lblStatus.setText(universe.toString());
 		}

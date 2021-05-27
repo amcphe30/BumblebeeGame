@@ -83,9 +83,11 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 		}
 		
 		if (direction == 1) {
-			output = imageLeft[index];
+			//output = imageLeft[index];
+			output = imageLeft[1];
 		} else if (direction == 2) {
-			output = imageRight[index];
+			//output = imageRight[index];
+			output = imageRight[1];
 		} 
 		
 		return output;
