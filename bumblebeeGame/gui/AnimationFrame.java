@@ -34,7 +34,6 @@ public class AnimationFrame extends JFrame {
 	private JLabel lblLevelLabel;
 	private JLabel lblLevel;
 	private JLabel lblStatus;
-	private JLabel username;
 	private JLabel lblFirstPlace;
 	private JLabel lblSecondPlace;
 	private JLabel lblThirdPlace;

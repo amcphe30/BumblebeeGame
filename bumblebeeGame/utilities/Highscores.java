@@ -13,7 +13,7 @@ public class Highscores {
 			names = new ArrayList<String>();
 			scores = new ArrayList<Integer>();
 			for (int i = 0; i < MAXSCORES; i++) {
-				names.add("");
+				names.add("-----");
 				scores.add(0);
 			}
 		}

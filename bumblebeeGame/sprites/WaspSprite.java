@@ -18,8 +18,8 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 	private int randNum = randomInt(10, 0);
 	private double deltaX = speed;
 	private double deltaY = speed;
-	private double height = 50;
-	private double width = 50;
+	private double height = 75;
+	private double width = 75;
 	private int direction = 2; //1 = left; 2 = right
 	private static double playerX = 0;
 	private static double playerY = 0;
@@ -83,11 +83,9 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 		}
 		
 		if (direction == 1) {
-			//output = imageLeft[index];
-			output = imageLeft[1];
+			output = imageLeft[index];
 		} else if (direction == 2) {
-			//output = imageRight[index];
-			output = imageRight[1];
+			output = imageRight[index];
 		} 
 		
 		return output;
