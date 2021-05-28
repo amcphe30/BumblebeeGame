@@ -39,7 +39,7 @@ public class Highscores {
 		String name = getName(i);
 		name = String.format("%-10s", name);
 		String score = String.valueOf(getScore(i));
-		score = String.format("%3s", score);
+		score = String.format("%-3s", score);
 		
 		String highscore = name + " " + String.valueOf(score);
 		return highscore;

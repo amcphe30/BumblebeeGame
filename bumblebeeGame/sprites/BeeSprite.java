@@ -161,6 +161,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
 				stop();
 				gameOver = true;
+				//String name = AnimationFrame.getUserInput();
 				Highscores.addNewHighscore("name", getPoints());
 			}
 			

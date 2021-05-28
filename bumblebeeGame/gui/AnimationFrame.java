@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 
 public class AnimationFrame extends JFrame {
@@ -29,6 +30,10 @@ public class AnimationFrame extends JFrame {
 
 	private JPanel panel = null;
 	private JButton btnPauseRun;
+	private JButton btnSetUsername;
+	private JTextField textField;
+	private String userInput;
+	private JLabel label;
 	private JLabel lblTimeLabel;
 	private JLabel lblTime;
 	private JLabel lblLevelLabel;
@@ -106,12 +111,31 @@ public class AnimationFrame extends JFrame {
 				btnPauseRun_mouseClicked(arg0);
 			}
 		});
+		
+		btnSetUsername = new JButton("set username");
+		btnSetUsername.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				btnSetUsername_mouseClicked(arg0);
+			}
+		});
+	
+		//textField = new JTextField();
+		//textField.setBounds(20, 350, 150, 32);
+		//getContentPane().add(textField);
+		//getContentPane().setComponentZOrder(textField, 3);
 
 		btnPauseRun.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnPauseRun.setBounds(20, 20, 48, 32);
 		btnPauseRun.setFocusable(false);
 		getContentPane().add(btnPauseRun);
 		getContentPane().setComponentZOrder(btnPauseRun, 0);
+		
+		//btnSetUsername.setFont(new Font("Tahoma", Font.BOLD, 12));
+		//btnSetUsername.setBounds(20, 120, 250, 32);
+		//btnSetUsername.setFocusable(false);
+		//getContentPane().add(btnSetUsername);
+		//getContentPane().setComponentZOrder(btnSetUsername, 0);
 
 		lblTimeLabel = new JLabel("Time: ");
 		lblTimeLabel.setForeground(Color.YELLOW);
@@ -307,6 +331,10 @@ public class AnimationFrame extends JFrame {
 			isPaused = true;
 			this.btnPauseRun.setText(">");
 		}
+	}
+	
+	protected void btnSetUsername_mouseClicked(MouseEvent arg0) {
+		userInput = textField.getText();
 	}
 
 	private void handleKeyboardInput() {
