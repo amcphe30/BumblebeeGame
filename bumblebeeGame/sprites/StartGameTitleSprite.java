@@ -4,25 +4,22 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class TitleSprite implements DisplayableSprite{
+public class StartGameTitleSprite implements DisplayableSprite {
 	
 	private Image image = null;
 	private double centerX;
 	private double centerY;
 	private double width;
 	private double height;
-	private boolean visible;
+	private static boolean visible = false;
 	
-	public TitleSprite(String filename, double centerX, double centerY, double width, double height) {
+	public StartGameTitleSprite(double centerX, double centerY) {
 		
 		this.centerX = centerX;
 		this.centerY = centerY;
-		this.width = width;
-		this.height = height;
 
 		try {				
-			String path = String.format("res/titles/%s.png", filename);
-			image = ImageIO.read(new File(path));
+			image = ImageIO.read(new File("res/titles/start_game.png"));
 		}
 		catch (IOException e) {
 			System.out.println(e.toString());
@@ -39,8 +36,8 @@ public class TitleSprite implements DisplayableSprite{
 		return visible;
 	}
 	
-	public void setVisible(boolean visible) {
-		this.visible = visible;
+	public static void setVisible(boolean b) {
+		visible = b;
 	}
 
 	public double getMinX() {
@@ -60,11 +57,11 @@ public class TitleSprite implements DisplayableSprite{
 	}
 
 	public double getHeight() {
-		return height;
+		return image.getHeight(null) / 3;
 	}
 
 	public double getWidth() {
-		return width;
+		return image.getWidth(null) / 3;
 	}
 
 	public double getCenterX() {

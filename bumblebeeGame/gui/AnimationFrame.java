@@ -128,8 +128,8 @@ public class AnimationFrame extends JFrame {
 		btnPauseRun.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnPauseRun.setBounds(20, 20, 48, 32);
 		btnPauseRun.setFocusable(false);
-		getContentPane().add(btnPauseRun);
-		getContentPane().setComponentZOrder(btnPauseRun, 0);
+		//getContentPane().add(btnPauseRun);
+		//getContentPane().setComponentZOrder(btnPauseRun, 0);
 		
 		//btnSetUsername.setFont(new Font("Tahoma", Font.BOLD, 12));
 		//btnSetUsername.setBounds(20, 120, 250, 32);
@@ -141,27 +141,27 @@ public class AnimationFrame extends JFrame {
 		lblTimeLabel.setForeground(Color.YELLOW);
 		lblTimeLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblTimeLabel.setBounds(80, 22, 96, 30);
-		getContentPane().add(lblTimeLabel);
-		getContentPane().setComponentZOrder(lblTimeLabel, 0);
+		//getContentPane().add(lblTimeLabel);
+		//getContentPane().setComponentZOrder(lblTimeLabel, 0);
 
 		lblTime = new JLabel("000");
 		lblTime.setForeground(Color.YELLOW);
 		lblTime.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblTime.setBounds(192, 22, 320, 30);
-		getContentPane().add(lblTime);
-		getContentPane().setComponentZOrder(lblTime, 0);
+		//getContentPane().add(lblTime);
+		//getContentPane().setComponentZOrder(lblTime, 0);
 
 		lblLevelLabel = new JLabel("Points: ");
-		lblLevelLabel.setForeground(Color.YELLOW);
+		lblLevelLabel.setForeground(Color.WHITE);
 		lblLevelLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblLevelLabel.setBounds(528, 22, 128, 30);
+		lblLevelLabel.setBounds(825, 22, 128, 30);
 		getContentPane().add(lblLevelLabel);
 		getContentPane().setComponentZOrder(lblLevelLabel, 0);
 
 		lblLevel = new JLabel("000");
-		lblLevel.setForeground(Color.YELLOW);
+		lblLevel.setForeground(Color.WHITE);
 		lblLevel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblLevel.setBounds(672, 22, 48, 30);
+		lblLevel.setBounds(950, 22, 48, 30);
 		getContentPane().add(lblLevel);
 		getContentPane().setComponentZOrder(lblLevel, 0);
 

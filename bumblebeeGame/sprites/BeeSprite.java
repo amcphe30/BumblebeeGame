@@ -1,6 +1,7 @@
 import java.awt.Image; 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -23,9 +24,8 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	private int direction = 2; //1 = left; 2 = right
 	private static int points = 0;
 	public static boolean gameOver = false;
-	private boolean loss = false;
 	private static boolean retry = false;
-	private boolean startScreen = false;
+	private boolean firstPlay = true;
 	
 	public BeeSprite() {
 		super();
@@ -148,8 +148,15 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		elapsedTime += actual_delta_time;
 		
+		if (firstPlay && elapsedTime < 3000) {
+			StartGameTitleSprite.setVisible(true);
+		} else {
+			StartGameTitleSprite.setVisible(false);
+		}
+		
 		if (gameOver == false) {
 			
+			GameOverTitleSprite.setVisible(false);
 			Highscores.setVisible(false);
 		
 			deltaX = velocityX * actual_delta_time * 0.001;
@@ -159,25 +166,15 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			centerY += deltaY;
 			
 			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
-				stop();
-				gameOver = true;
-				//String name = AnimationFrame.getUserInput();
-				Highscores.addNewHighscore("name", getPoints());
+				gameOver();
 			}
 			
 			WaspSprite.setPlayerX(centerX);
 			WaspSprite.setPlayerY(centerY);
-			
-		} else {
-			
-			Highscores.setVisible(true);
-			
 		}
-		
-		
+			
 		if (retry == true) {
 			gameOver = false;
-			loss = false;
 			points = 0;
 			centerX = 0;
 			centerY = 0;
@@ -208,17 +205,15 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		return colliding;		
 	}
 	
-	public void startAnimation() {
+	public void gameOver() {
+		stop();
+		gameOver = true;
+		GameOverTitleSprite.setVisible(true);
+		Highscores.addNewHighscore("name", getPoints());
+		Highscores.setVisible(true);
 		
 	}
 	
-	public void lossAnimation() {
-		
-	}
-	
-	public void highScoreAnimation() {
-		
-	}
 
 	public static void setRetry(boolean b) {
 		retry = b;		

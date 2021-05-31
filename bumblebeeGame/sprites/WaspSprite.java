@@ -13,8 +13,8 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 	private static Image[] imageLeft = null;
 	private static Image[] imageRight = null;
 	private long elapsedTime = 0;
-	private double centerX = randomInt(-400, -450);
-	private double centerY = randomInt(-400, -450);
+	private double centerX = -600;
+	private double centerY = -600;
 	private int randNum = randomInt(10, 0);
 	private double deltaX = speed;
 	private double deltaY = speed;
@@ -165,8 +165,8 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 		double targetY;
 		
 		if (BeeSprite.gameOver == true) {
-			targetX = -300;
-			targetY = -300;
+			targetX = -600;
+			targetY = -600;
 		} else {
 			targetX = playerX;
 			targetY = playerY;
