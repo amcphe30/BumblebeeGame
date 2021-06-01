@@ -148,7 +148,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		elapsedTime += actual_delta_time;
 		
-		if (firstPlay && elapsedTime < 3000) {
+		if (firstPlay && elapsedTime < 3000 && centerX == 0) {
 			StartGameTitleSprite.setVisible(true);
 		} else {
 			StartGameTitleSprite.setVisible(false);
@@ -156,8 +156,10 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		if (gameOver == false) {
 			
-			GameOverTitleSprite.setVisible(false);
+			//GameOverTitleSprite.setVisible(false);
+			HighScoreTitleSprite.setVisible(false);
 			Highscores.setVisible(false);
+			PressRTitleSprite.setVisible(false);
 		
 			deltaX = velocityX * actual_delta_time * 0.001;
 			centerX += deltaX;
@@ -171,6 +173,8 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			
 			WaspSprite.setPlayerX(centerX);
 			WaspSprite.setPlayerY(centerY);
+		} else {
+			PressRTitleSprite.setVisible(true);
 		}
 			
 		if (retry == true) {
@@ -208,15 +212,23 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	public void gameOver() {
 		stop();
 		gameOver = true;
-		GameOverTitleSprite.setVisible(true);
+		//GameOverTitleSprite.setVisible(true);
+		HighScoreTitleSprite.setVisible(true);
 		Highscores.addNewHighscore("name", getPoints());
 		Highscores.setVisible(true);
 		
+	}
+	
+	public void sleep() {
+        long start = System.currentTimeMillis();
+        while(start >= System.currentTimeMillis() - 2000);
+        
 	}
 	
 
 	public static void setRetry(boolean b) {
 		retry = b;		
 	}
+		
 }
 

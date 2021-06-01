@@ -31,14 +31,14 @@ public class MovableSpriteUniverse implements Universe {
 	this.setYCenter(0);
 	background = new MappedBackground();
 	player1 = new BeeSprite();
-	wasp = new WaspSprite(0, 1.5);
+	wasp = new WaspSprite(1.5);
 	flower = new FlowerSprite();
 	cloud_a = new CloudSprite(1, -200, -100);
 	cloud_b = new CloudSprite(2, 300, -150);
 	game_overTitle = new GameOverTitleSprite(-325, -150);
-	highscoreTitle = new HighScoreTitleSprite(0, 0, 50, 50);
+	highscoreTitle = new HighScoreTitleSprite(0, -150);
 	new_highscoreTitle = new NewHighScoreTitleSprite(0, 0, 50, 50);
-	press_rTitle = new PressRTitleSprite( 0, 0, 50, 50);
+	press_rTitle = new PressRTitleSprite(0, -100);
 	start_gameTitle = new StartGameTitleSprite(-325, -100);
 	sprites.add(player1);
 	sprites.add(wasp);

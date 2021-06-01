@@ -9,16 +9,12 @@ public class HighScoreTitleSprite implements DisplayableSprite{
 	private Image image = null;
 	private double centerX;
 	private double centerY;
-	private double width;
-	private double height;
 	private static boolean visible = false;
 	
-	public HighScoreTitleSprite(double centerX, double centerY, double width, double height) {
+	public HighScoreTitleSprite(double centerX, double centerY) {
 		
 		this.centerX = centerX;
 		this.centerY = centerY;
-		this.width = width;
-		this.height = height;
 
 		try {				
 			image = ImageIO.read(new File("res/titles/highscore.png"));
@@ -43,19 +39,19 @@ public class HighScoreTitleSprite implements DisplayableSprite{
 	}
 
 	public double getMinX() {
-		return centerX - (width / 2);
+		return centerX - (getWidth() / 2);
 	}
 
 	public double getMaxX() {
-		return centerX + (width / 2);
+		return centerX + (getWidth() / 2);
 	}
 
 	public double getMinY() {
-		return centerY - (height / 2);
+		return centerY - (getHeight() / 2);
 	}
 
 	public double getMaxY() {
-		return centerY + (height / 2);
+		return centerY + (getHeight() / 2);
 	}
 
 	public double getHeight() {

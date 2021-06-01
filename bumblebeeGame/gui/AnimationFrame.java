@@ -293,6 +293,8 @@ public class AnimationFrame extends JFrame {
 		this.lblTime.setText(Long.toString(elapsed_time));
 		this.lblLevel.setText(String.valueOf(BeeSprite.getPoints()));
 		
+		//if 
+		
 		if (Highscores.getVisible()) {
 			this.lblFirstPlace.setText(Highscores.getHighscore(0));
 			this.lblSecondPlace.setText(Highscores.getHighscore(1));
