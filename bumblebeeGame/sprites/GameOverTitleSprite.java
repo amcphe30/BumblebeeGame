@@ -57,11 +57,11 @@ public class GameOverTitleSprite implements DisplayableSprite{
 	}
 
 	public double getHeight() {
-		return image.getHeight(null) / 3;
+		return image.getHeight(null) / 2;
 	}
 
 	public double getWidth() {
-		return image.getWidth(null) / 3;
+		return image.getWidth(null) / 2;
 	}
 
 	public double getCenterX() {

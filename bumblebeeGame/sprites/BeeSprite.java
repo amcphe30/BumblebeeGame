@@ -24,8 +24,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	private int direction = 2; //1 = left; 2 = right
 	private static int points = 0;
 	public static boolean gameOver = false;
-	private static boolean retry = false;
-	private boolean firstPlay = true;
+	private boolean displayScores = false;
 	
 	public BeeSprite() {
 		super();
@@ -148,7 +147,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		elapsedTime += actual_delta_time;
 		
-		if (firstPlay && elapsedTime < 3000 && centerX == 0) {
+		if (elapsedTime < 3000 && centerX == 0) {
 			StartGameTitleSprite.setVisible(true);
 		} else {
 			StartGameTitleSprite.setVisible(false);
@@ -156,7 +155,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		if (gameOver == false) {
 			
-			//GameOverTitleSprite.setVisible(false);
+			GameOverTitleSprite.setVisible(false);
 			HighScoreTitleSprite.setVisible(false);
 			Highscores.setVisible(false);
 			PressRTitleSprite.setVisible(false);
@@ -174,15 +173,28 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			WaspSprite.setPlayerX(centerX);
 			WaspSprite.setPlayerY(centerY);
 		} else {
-			PressRTitleSprite.setVisible(true);
+			
+			GameOverTitleSprite.setVisible(true);
+			
+			if (displayScores) {
+				GameOverTitleSprite.setVisible(false);
+				Highscores.setVisible(true);
+				PressRTitleSprite.setVisible(true);
+				HighScoreTitleSprite.setVisible(true);
+			} else {
+				if (keyboard.keyDown(32)) {
+					displayScores = true;
+				}
+			}
+
 		}
 			
-		if (retry == true) {
+		if (keyboard.keyDown(82)) {				
 			gameOver = false;
 			points = 0;
 			centerX = 0;
 			centerY = 0;
-			retry = false;
+
 		}
 		
 	}	
@@ -212,22 +224,10 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	public void gameOver() {
 		stop();
 		gameOver = true;
-		//GameOverTitleSprite.setVisible(true);
-		HighScoreTitleSprite.setVisible(true);
+		//HighScoreTitleSprite.setVisible(true);
 		Highscores.addNewHighscore("name", getPoints());
-		Highscores.setVisible(true);
-		
-	}
-	
-	public void sleep() {
-        long start = System.currentTimeMillis();
-        while(start >= System.currentTimeMillis() - 2000);
-        
-	}
-	
-
-	public static void setRetry(boolean b) {
-		retry = b;		
+		//Highscores.setVisible(true);
+		//PressRTitleSprite.setVisible(true);		
 	}
 		
 }

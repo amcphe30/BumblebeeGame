@@ -12,7 +12,6 @@ public class MovableSpriteUniverse implements Universe {
 	private DisplayableSprite cloud_b = null;
 	private DisplayableSprite game_overTitle = null;
 	private DisplayableSprite highscoreTitle = null;
-	private DisplayableSprite new_highscoreTitle = null;
 	private DisplayableSprite press_rTitle = null;
 	private DisplayableSprite start_gameTitle = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
@@ -35,17 +34,15 @@ public class MovableSpriteUniverse implements Universe {
 	flower = new FlowerSprite();
 	cloud_a = new CloudSprite(1, -200, -100);
 	cloud_b = new CloudSprite(2, 300, -150);
-	game_overTitle = new GameOverTitleSprite(-325, -150);
+	game_overTitle = new GameOverTitleSprite(-500, -100);
 	highscoreTitle = new HighScoreTitleSprite(0, -150);
-	new_highscoreTitle = new NewHighScoreTitleSprite(0, 0, 50, 50);
 	press_rTitle = new PressRTitleSprite(0, -100);
-	start_gameTitle = new StartGameTitleSprite(-325, -100);
+	start_gameTitle = new StartGameTitleSprite(-500, -100);
 	sprites.add(player1);
 	sprites.add(wasp);
 	sprites.add(flower);
 	sprites.add(game_overTitle);
 	sprites.add(highscoreTitle);
-	sprites.add(new_highscoreTitle);
 	sprites.add(press_rTitle);
 	sprites.add(start_gameTitle);
 	
@@ -127,10 +124,6 @@ public class MovableSpriteUniverse implements Universe {
 		// DOWN
 		if (keyboard.keyDown(40)) {
 			velocityY += VELOCITY;			
-		}
-		// R
-		if (keyboard.keyDown(82)) {
-			BeeSprite.setRetry(true);
 		}
 		
 		for (int i = 0; i < sprites.size(); i++) {
