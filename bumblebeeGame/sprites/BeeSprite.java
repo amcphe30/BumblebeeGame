@@ -19,12 +19,11 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	private double deltaY = 0;
 	private double height = 50;
 	private double width = 50;
-	private double velocityX = 0;
-	private double velocityY = 0;
 	private int direction = 2; //1 = left; 2 = right
 	private static int points = 0;
 	public static boolean gameOver = false;
 	private boolean displayScores = false;
+	private final double VELOCITY = 200;
 	
 	public BeeSprite() {
 		super();
@@ -66,20 +65,15 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	}	
 
 	public void moveX(double pixelsPerSecond) {
-		if (gameOver == false) {
-			this.velocityX = pixelsPerSecond;
-		}
+		
 	}
 
 	public void moveY(double pixelsPerSecond) {
-		if (gameOver == false) {
-			this.velocityY = pixelsPerSecond;
-		}
+		
 	}
 
 	public void stop() {
-		this.velocityX = 0;
-		this.velocityY = 0;
+		
 	}
 
 	public Image getImage() {		
@@ -147,18 +141,41 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 		elapsedTime += actual_delta_time;
 		
+		double velocityX = 0;
+		double velocityY = 0;
+		
+		//LEFT	
+		if (keyboard.keyDown(37)) {
+			velocityX = -VELOCITY;
+		}
+		//UP
+		if (keyboard.keyDown(38)) {
+			velocityY = -VELOCITY;			
+		}
+		// RIGHT
+		if (keyboard.keyDown(39)) {
+			velocityX = VELOCITY;
+		}
+		// DOWN
+		if (keyboard.keyDown(40)) {
+			velocityY = VELOCITY;			
+		}
+		
+		// Displays start game title
 		if (elapsedTime < 3000 && centerX == 0) {
 			StartGameTitleSprite.setVisible(true);
 		} else {
 			StartGameTitleSprite.setVisible(false);
 		}
 		
+		// Actual game play
 		if (gameOver == false) {
 			
 			GameOverTitleSprite.setVisible(false);
 			HighScoreTitleSprite.setVisible(false);
 			Highscores.setVisible(false);
 			PressRTitleSprite.setVisible(false);
+			displayScores = false;
 		
 			deltaX = velocityX * actual_delta_time * 0.001;
 			centerX += deltaX;
@@ -167,13 +184,16 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			centerY += deltaY;
 			
 			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
-				gameOver();
+				gameOver = true;
+				Highscores.addNewHighscore("name", getPoints());
 			}
 			
 			WaspSprite.setPlayerX(centerX);
 			WaspSprite.setPlayerY(centerY);
+		
 		} else {
 			
+			// End game: game over title then scores displayed after any key is pressed
 			GameOverTitleSprite.setVisible(true);
 			
 			if (displayScores) {
@@ -182,23 +202,22 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 				PressRTitleSprite.setVisible(true);
 				HighScoreTitleSprite.setVisible(true);
 			} else {
-				if (keyboard.keyDown(32)) {
+				if (keyboard.anyKeyDown()) {
 					displayScores = true;
 				}
 			}
 
 		}
 			
+		// if 'r' is pressed at anytime, game play restarts
 		if (keyboard.keyDown(82)) {				
 			gameOver = false;
 			points = 0;
 			centerX = 0;
 			centerY = 0;
-
 		}
 		
-	}	
-	
+	}		
 	
 	public boolean checkCollision(Universe sprites, String instance, double deltaX, double deltaY) {
 		
@@ -219,15 +238,6 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			}
 		}
 		return colliding;		
-	}
-	
-	public void gameOver() {
-		stop();
-		gameOver = true;
-		//HighScoreTitleSprite.setVisible(true);
-		Highscores.addNewHighscore("name", getPoints());
-		//Highscores.setVisible(true);
-		//PressRTitleSprite.setVisible(true);		
 	}
 		
 }

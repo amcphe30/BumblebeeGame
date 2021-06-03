@@ -61,8 +61,6 @@ public class AnimationFrame extends JFrame {
 	//local (and direct references to various objects in universe ... should reduce lag by avoiding dynamic lookup
 	private Animation animation = null;
 	private DisplayableSprite player1 = null;
-	private DisplayableSprite wasp = null;
-	private DisplayableSprite flower = null;
 	private ArrayList<DisplayableSprite> sprites = null;
 	private Background background = null;
 	boolean centreOnPlayer = false;
@@ -235,8 +233,6 @@ public class AnimationFrame extends JFrame {
 
 			sprites = universe.getSprites();
 			player1 = universe.getPlayer1();
-			wasp = universe.getWasp();
-			flower = universe.getFlower();
 			background = universe.getBackground();
 			centreOnPlayer = universe.centerOnPlayer();
 			this.scale = universe.getScale();

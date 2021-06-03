@@ -18,15 +18,17 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 	private int randNum = randomInt(10, 0);
 	private double deltaX = speed;
 	private double deltaY = speed;
-	private double height = 75;
-	private double width = 75;
+	private double height = 50;
+	private double width = 50;
 	private int direction = 2; //1 = left; 2 = right
 	private static double playerX = 0;
 	private static double playerY = 0;
+	private int minPoints = 0;
 	
-	public WaspSprite(double speed) {
+	public WaspSprite(double speed, int minPoints) {
 		super();
 		this.speed = speed;
+		this.minPoints = minPoints;
 		
 		if (imageLeft == null) {
 			try {				
@@ -145,7 +147,7 @@ public class WaspSprite implements DisplayableSprite, MovableSprite {
 	public boolean isAngry() {
 		int points = BeeSprite.getPoints();
 		boolean angry = false;
-		if (points > 0) {
+		if (points >= minPoints) {
 			angry = true;
 		}
 		

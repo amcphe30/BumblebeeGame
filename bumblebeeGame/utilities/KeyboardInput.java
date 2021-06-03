@@ -43,6 +43,19 @@ public class KeyboardInput implements KeyListener {
 			}
 		}
 	}
+	
+	public boolean anyKeyDown() {
+		
+		boolean output = false;
+		for( int i = 0; i < KEY_COUNT; ++i ) {
+			if (keys[i] == KeyState.ONCE) {
+				output = true;
+				break;
+			}				
+		}
+		
+		return output;
+	}
 
 	public boolean keyDown( int keyCode ) {
 		return keys[ keyCode ] == KeyState.ONCE ||

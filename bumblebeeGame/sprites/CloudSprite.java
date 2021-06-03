@@ -1,76 +1,60 @@
-import java.awt.Image; 
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class CloudSprite implements DisplayableSprite {
+public class CloudSprite implements DisplayableSprite{
 	
-	private static Image image = null;
-	private static Image cloud_a = null;
-	private static Image cloud_b = null;
-	private double centerX = 0;
-	private double centerY = 0;
-	private double width = 300;
-	private double height = 300;
-	private boolean visible = true;
-	private int cloud = 1;
+	private Image image = null;
+	private double centerX = -500;
+	private double centerY = -100;
 	
-	public CloudSprite(int cloud, double centerX, double centerY) {
-		
-		if (image == null) {
-			try {
-				cloud_a = ImageIO.read(new File("res/cloud-1.png"));
-				cloud_b = ImageIO.read(new File("res/cloud-2.png"));
-			}
-			catch (IOException e) {
-				System.out.println(e.toString());
-			}
-		}
-		
-		this.cloud = cloud;
+	public CloudSprite(double centerX, double centerY) {
+
 		this.centerX = centerX;
 		this.centerY = centerY;
 		
-	}
-	
-	public Image getImage() {	
-		
-		if (cloud == 1) {
-			image = cloud_a;
-		} else {
-			image = cloud_b;
+		try {				
+			image = ImageIO.read(new File("res/clouds.png"));
 		}
+		catch (IOException e) {
+			System.out.println(e.toString());
+		}	
 		
+	}
+
+
+	public Image getImage() {
 		return image;
 	}
 
 	public boolean getVisible() {
-		return visible;
+		return true;
 	}
 
 	public double getMinX() {
-		return centerX - (getWidth() / 2);
+		return centerX - (getWidth());
 	}
 
 	public double getMaxX() {
-		return centerX + (getWidth() / 2);
+		return centerX + (getWidth());
 	}
 
 	public double getMinY() {
-		return centerY - (getHeight() / 2);
+		return centerY - (getHeight());
 	}
 
 	public double getMaxY() {
-		return centerY + (getHeight() / 2);
+		return centerY + (getHeight());
 	}
 
 	public double getHeight() {
-		return height;
+		return image.getHeight(null);
 	}
 
 	public double getWidth() {
-		return width;
+		return image.getWidth(null);
 	}
 
 	public double getCenterX() {
@@ -86,6 +70,12 @@ public class CloudSprite implements DisplayableSprite {
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
+		
+		centerX += 0.5;
+		
+		if (centerX > 2000) {
+			centerX = -500;
+		}
 		
 	}
 

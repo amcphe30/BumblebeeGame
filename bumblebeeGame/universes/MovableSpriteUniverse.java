@@ -6,14 +6,15 @@ public class MovableSpriteUniverse implements Universe {
 	private boolean gameOver = false;
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
-	private DisplayableSprite wasp = null;
+	private DisplayableSprite wasp1 = null;
+	private DisplayableSprite wasp2 = null;
 	private DisplayableSprite flower = null;
-	private DisplayableSprite cloud_a = null;
-	private DisplayableSprite cloud_b = null;
 	private DisplayableSprite game_overTitle = null;
 	private DisplayableSprite highscoreTitle = null;
 	private DisplayableSprite press_rTitle = null;
 	private DisplayableSprite start_gameTitle = null;
+	private DisplayableSprite cloud1 = null;
+	private DisplayableSprite cloud2 = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
 	private long elapsedTime = 0;
 	private String status = "";
@@ -30,22 +31,33 @@ public class MovableSpriteUniverse implements Universe {
 	this.setYCenter(0);
 	background = new MappedBackground();
 	player1 = new BeeSprite();
-	wasp = new WaspSprite(1.5);
+	wasp1 = new WaspSprite(1.5, 0);
+	wasp2 = new WaspSprite(2.0, 10);
 	flower = new FlowerSprite();
-	cloud_a = new CloudSprite(1, -200, -100);
-	cloud_b = new CloudSprite(2, 300, -150);
 	game_overTitle = new GameOverTitleSprite(-500, -100);
 	highscoreTitle = new HighScoreTitleSprite(0, -150);
 	press_rTitle = new PressRTitleSprite(0, -100);
 	start_gameTitle = new StartGameTitleSprite(-500, -100);
+	cloud1 = new CloudSprite(-500, -50);
+	cloud2 = new CloudSprite(100, -50);
+	sprites.add(cloud1);
+	sprites.add(cloud2);
 	sprites.add(player1);
-	sprites.add(wasp);
+	sprites.add(wasp1);
+	sprites.add(wasp2);
 	sprites.add(flower);
 	sprites.add(game_overTitle);
 	sprites.add(highscoreTitle);
 	sprites.add(press_rTitle);
 	sprites.add(start_gameTitle);
 	
+	double speed = 1.5;
+	int minPoints = 0;
+	for (int i = 0; i < 10; i++) {
+		speed += 0.5;
+		minPoints += 5;
+		sprites.add(new WaspSprite(speed, minPoints));
+	}
 
 	}
 	
@@ -83,10 +95,6 @@ public class MovableSpriteUniverse implements Universe {
 		return player1;
 	}
 	
-	public DisplayableSprite getWasp() {
-		return wasp;
-	}
-	
 	public DisplayableSprite getFlower() {
 		return flower;
 	}
@@ -102,41 +110,17 @@ public class MovableSpriteUniverse implements Universe {
 	public boolean gameOver() {
 		return gameOver;
 	}
-
 	
 	public void update(KeyboardInput keyboard, long actual_delta_time) {
-
-		double velocityX = 0;
-		double velocityY = 0;
 		
-		//LEFT	
-		if (keyboard.keyDown(37)) {
-			velocityX = -VELOCITY;
-		}
-		//UP
-		if (keyboard.keyDown(38)) {
-			velocityY = -VELOCITY;			
-		}
-		// RIGHT
-		if (keyboard.keyDown(39)) {
-			velocityX += VELOCITY;
-		}
-		// DOWN
-		if (keyboard.keyDown(40)) {
-			velocityY += VELOCITY;			
+		if (keyboard.keyDownOnce(27)) {
+			complete = true;
 		}
 		
 		for (int i = 0; i < sprites.size(); i++) {
 			DisplayableSprite sprite = sprites.get(i);
-			
-			if (sprite instanceof MovableSprite) {
-				MovableSprite movable = (MovableSprite)sprite;
-				movable.moveX(velocityX);
-				movable.moveY(velocityY);
-			}
-			
 			sprite.update(this, keyboard, actual_delta_time);
-    	}    	
+    	}
 
 	}
 	
