@@ -32,12 +32,7 @@ public class AnimationFrame extends JFrame {
 	private JButton btnPauseRun;
 	private JButton btnSetUsername;
 	private JTextField textField;
-	private String userInput;
-	private JLabel label;
-	private JLabel lblTimeLabel;
-	private JLabel lblTime;
-	private JLabel lblLevelLabel;
-	private JLabel lblLevel;
+	private JLabel lblPoints;
 	private JLabel lblStatus;
 	private JLabel lblFirstPlace;
 	private JLabel lblSecondPlace;
@@ -135,33 +130,12 @@ public class AnimationFrame extends JFrame {
 		//getContentPane().add(btnSetUsername);
 		//getContentPane().setComponentZOrder(btnSetUsername, 0);
 
-		lblTimeLabel = new JLabel("Time: ");
-		lblTimeLabel.setForeground(Color.YELLOW);
-		lblTimeLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblTimeLabel.setBounds(80, 22, 96, 30);
-		//getContentPane().add(lblTimeLabel);
-		//getContentPane().setComponentZOrder(lblTimeLabel, 0);
-
-		lblTime = new JLabel("000");
-		lblTime.setForeground(Color.YELLOW);
-		lblTime.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblTime.setBounds(192, 22, 320, 30);
-		//getContentPane().add(lblTime);
-		//getContentPane().setComponentZOrder(lblTime, 0);
-
-		lblLevelLabel = new JLabel("Points: ");
-		lblLevelLabel.setForeground(Color.WHITE);
-		lblLevelLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblLevelLabel.setBounds(825, 22, 128, 30);
-		getContentPane().add(lblLevelLabel);
-		getContentPane().setComponentZOrder(lblLevelLabel, 0);
-
-		lblLevel = new JLabel("000");
-		lblLevel.setForeground(Color.WHITE);
-		lblLevel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblLevel.setBounds(950, 22, 48, 30);
-		getContentPane().add(lblLevel);
-		getContentPane().setComponentZOrder(lblLevel, 0);
+		lblPoints = new JLabel("000");
+		lblPoints.setForeground(Color.WHITE);
+		lblPoints.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblPoints.setBounds(950, 22, 48, 30);
+		getContentPane().add(lblPoints);
+		getContentPane().setComponentZOrder(lblPoints, 0);
 
 		lblStatus = new JLabel("Status");
 		lblStatus.setForeground(Color.WHITE);
@@ -286,8 +260,7 @@ public class AnimationFrame extends JFrame {
 	}
 
 	private void updateControls() {
-		this.lblTime.setText(Long.toString(elapsed_time));
-		this.lblLevel.setText(String.valueOf(BeeSprite.getPoints()));
+		this.lblPoints.setText(String.valueOf(BeeSprite.getPoints()));
 		
 		//if 
 		
@@ -332,7 +305,7 @@ public class AnimationFrame extends JFrame {
 	}
 	
 	protected void btnSetUsername_mouseClicked(MouseEvent arg0) {
-		userInput = textField.getText();
+		
 	}
 
 	private void handleKeyboardInput() {

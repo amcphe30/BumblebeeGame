@@ -4,19 +4,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class CloudSprite implements DisplayableSprite{
+public class PointsTitleSprite implements DisplayableSprite{
 	
 	private Image image = null;
-	private double centerX = -500;
-	private double centerY = -100;
+	private double centerX = AnimationFrame.SCREEN_WIDTH / 2 - 150;
+	private double centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 40;
 	
-	public CloudSprite(double centerX, double centerY) {
+	public PointsTitleSprite() {
 
-		this.centerX = centerX;
-		this.centerY = centerY;
-		
 		try {				
-			image = ImageIO.read(new File("res/clouds.png"));
+			image = ImageIO.read(new File("res/titles/points.png"));
 		}
 		catch (IOException e) {
 			System.out.println(e.toString());
@@ -34,27 +31,27 @@ public class CloudSprite implements DisplayableSprite{
 	}
 
 	public double getMinX() {
-		return centerX - (getWidth());
+		return centerX - (getWidth() / 2);
 	}
 
 	public double getMaxX() {
-		return centerX + (getWidth());
+		return centerX + (getWidth() / 2);
 	}
 
 	public double getMinY() {
-		return centerY - (getHeight());
+		return centerY - (getHeight() / 2);
 	}
 
 	public double getMaxY() {
-		return centerY + (getHeight());
+		return centerY + (getHeight() / 2);
 	}
 
 	public double getHeight() {
-		return image.getHeight(null);
+		return image.getHeight(null) / 8;
 	}
 
 	public double getWidth() {
-		return image.getWidth(null);
+		return image.getWidth(null) / 8;
 	}
 
 	public double getCenterX() {
@@ -70,12 +67,6 @@ public class CloudSprite implements DisplayableSprite{
 	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
-		
-		centerX += 0.5;
-		
-		if (getMinX() > AnimationFrame.SCREEN_WIDTH) {
-			centerX = -500;
-		}
 		
 	}
 

@@ -13,6 +13,7 @@ public class MovableSpriteUniverse implements Universe {
 	private DisplayableSprite highscoreTitle = null;
 	private DisplayableSprite press_rTitle = null;
 	private DisplayableSprite start_gameTitle = null;
+	private DisplayableSprite pointsTitle = null;
 	private DisplayableSprite cloud1 = null;
 	private DisplayableSprite cloud2 = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
@@ -38,8 +39,9 @@ public class MovableSpriteUniverse implements Universe {
 	highscoreTitle = new HighScoreTitleSprite(0, -150);
 	press_rTitle = new PressRTitleSprite(0, -100);
 	start_gameTitle = new StartGameTitleSprite(-500, -100);
-	cloud1 = new CloudSprite(-500, -50);
-	cloud2 = new CloudSprite(100, -50);
+	pointsTitle = new PointsTitleSprite();
+	cloud1 = new CloudSprite(-1000, -50);
+	cloud2 = new CloudSprite(100, -15);
 	sprites.add(cloud1);
 	sprites.add(cloud2);
 	sprites.add(player1);
@@ -50,6 +52,7 @@ public class MovableSpriteUniverse implements Universe {
 	sprites.add(highscoreTitle);
 	sprites.add(press_rTitle);
 	sprites.add(start_gameTitle);
+	sprites.add(pointsTitle);
 	
 	double speed = 1.5;
 	int minPoints = 0;

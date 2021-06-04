@@ -1,6 +1,7 @@
 import java.awt.Image; 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -136,6 +137,18 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	public static void addPoint() {
 		points++;
 	}
+	
+	public String getName() {
+		//ideally this would call for user input then return that, but idk how so rn it's random
+		String[] names = {"Honey", "Honeycomb", "Nectar", "Sunny", "Honey suckle", "Sugar",
+								"Queen Bee", "Beatrice", "Wildflower",
+							"Tupelo", "Manuka", "Clover", "Orange Blossom", "Acacia", "Dandelion"};
+	    int min = -1;
+	    int max = names.length;
+	    double i;
+	    i = min + (Math.random() * (max - min));
+	    return names[(int) i];		
+	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
@@ -185,7 +198,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			
 			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
 				gameOver = true;
-				Highscores.addNewHighscore("name", getPoints());
+				Highscores.addNewHighscore(getName(), getPoints());
 			}
 			
 			WaspSprite.setPlayerX(centerX);
