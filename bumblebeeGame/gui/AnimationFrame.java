@@ -28,17 +28,15 @@ public class AnimationFrame extends JFrame {
 	private double xCenter = 0;		
 	private double yCenter = 0;
 
-	private JPanel panel = null;
-	private JButton btnPauseRun;
-	private JButton btnSetUsername;
-	private JTextField textField;
+	private JPanel panel = null;	
 	private JLabel lblPoints;
-	private JLabel lblStatus;
 	private JLabel lblFirstPlace;
 	private JLabel lblSecondPlace;
 	private JLabel lblThirdPlace;
 	private JLabel lblFourthPlace;
 	private JLabel lblFifthPlace;
+	public static boolean getUser = false;
+	private static String username = "";
 
 	private static boolean stop = false;
 
@@ -95,89 +93,49 @@ public class AnimationFrame extends JFrame {
 		panel = new DrawPanel();
 		panel.setLayout(null);
 		panel.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		getContentPane().add(panel, BorderLayout.CENTER);
-
-		btnPauseRun = new JButton("||");
-		btnPauseRun.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				btnPauseRun_mouseClicked(arg0);
-			}
-		});
-		
-		btnSetUsername = new JButton("set username");
-		btnSetUsername.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				btnSetUsername_mouseClicked(arg0);
-			}
-		});
-	
-		//textField = new JTextField();
-		//textField.setBounds(20, 350, 150, 32);
-		//getContentPane().add(textField);
-		//getContentPane().setComponentZOrder(textField, 3);
-
-		btnPauseRun.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnPauseRun.setBounds(20, 20, 48, 32);
-		btnPauseRun.setFocusable(false);
-		//getContentPane().add(btnPauseRun);
-		//getContentPane().setComponentZOrder(btnPauseRun, 0);
-		
-		//btnSetUsername.setFont(new Font("Tahoma", Font.BOLD, 12));
-		//btnSetUsername.setBounds(20, 120, 250, 32);
-		//btnSetUsername.setFocusable(false);
-		//getContentPane().add(btnSetUsername);
-		//getContentPane().setComponentZOrder(btnSetUsername, 0);
+		getContentPane().add(panel, BorderLayout.CENTER);	
 
 		lblPoints = new JLabel("000");
 		lblPoints.setForeground(Color.WHITE);
 		lblPoints.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblPoints.setBounds(950, 22, 48, 30);
-		getContentPane().add(lblPoints);
-		getContentPane().setComponentZOrder(lblPoints, 0);
-
-		lblStatus = new JLabel("Status");
-		lblStatus.setForeground(Color.WHITE);
-		lblStatus.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblStatus.setBounds(0, SCREEN_HEIGHT - 30 - 16, SCREEN_WIDTH, 36);
-		getContentPane().add(lblStatus);
-		getContentPane().setComponentZOrder(lblStatus, 0);
+		//getContentPane().add(lblPoints);
+		//getContentPane().setComponentZOrder(lblPoints, 0);
 		
 		//highscores
 		
 		lblFirstPlace = new JLabel("");
 		lblFirstPlace.setForeground(Color.WHITE);
 		lblFirstPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblFirstPlace.setBounds(300, 300, 220, 36);
+		lblFirstPlace.setBounds(300, 300, 300, 36);
 		getContentPane().add(lblFirstPlace);
 		getContentPane().setComponentZOrder(lblFirstPlace, 0);
 		
 		lblSecondPlace = new JLabel("");
 		lblSecondPlace.setForeground(Color.WHITE);
 		lblSecondPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblSecondPlace.setBounds(300, 340, 220, 36);
+		lblSecondPlace.setBounds(300, 340, 300, 36);
 		getContentPane().add(lblSecondPlace);
 		getContentPane().setComponentZOrder(lblSecondPlace, 0);
 		
 		lblThirdPlace = new JLabel("");
 		lblThirdPlace.setForeground(Color.WHITE);
 		lblThirdPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblThirdPlace.setBounds(300, 380, 220, 36);
+		lblThirdPlace.setBounds(300, 380, 300, 36);
 		getContentPane().add(lblThirdPlace);
 		getContentPane().setComponentZOrder(lblThirdPlace, 0);
 		
 		lblFourthPlace = new JLabel("");
 		lblFourthPlace.setForeground(Color.WHITE);
 		lblFourthPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblFourthPlace.setBounds(300, 420, 220, 36);
+		lblFourthPlace.setBounds(300, 420, 300, 36);
 		getContentPane().add(lblFourthPlace);
 		getContentPane().setComponentZOrder(lblFourthPlace, 0);
 		
 		lblFifthPlace = new JLabel("");
 		lblFifthPlace.setForeground(Color.WHITE);
 		lblFifthPlace.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblFifthPlace.setBounds(300, 460, 220, 36);
+		lblFifthPlace.setBounds(300, 460, 300, 36);
 		getContentPane().add(lblFifthPlace);
 		getContentPane().setComponentZOrder(lblFifthPlace, 0);
 
@@ -278,10 +236,15 @@ public class AnimationFrame extends JFrame {
 			this.lblFifthPlace.setText("");
 		}
 		
-		if (universe != null) {
-			this.lblStatus.setText(universe.toString());
+		if (getUser) {
+			username = JOptionPane.showInputDialog(panel, "What's your name?");
+			getUser = false;
 		}
 
+	}
+	
+	public static String getUsername() {
+		return username;
 	}
 
 	private void updateTime() {
@@ -293,28 +256,10 @@ public class AnimationFrame extends JFrame {
 
 	}
 
-	protected void btnPauseRun_mouseClicked(MouseEvent arg0) {
-		if (isPaused) {
-			isPaused = false;
-			this.btnPauseRun.setText("||");
-		}
-		else {
-			isPaused = true;
-			this.btnPauseRun.setText(">");
-		}
-	}
-	
-	protected void btnSetUsername_mouseClicked(MouseEvent arg0) {
-		
-	}
+
 
 	private void handleKeyboardInput() {
-		if (keyboard.keyDown(80) && ! isPaused) {
-			btnPauseRun_mouseClicked(null);	
-		}
-		if (keyboard.keyDown(79) && isPaused ) {
-			btnPauseRun_mouseClicked(null);
-		}
+
 		if (keyboard.keyDown(112)) {
 			scale *= 1.01;
 		}
@@ -333,8 +278,6 @@ public class AnimationFrame extends JFrame {
 
 			if (player1 != null && centreOnPlayer) {
 				xCenter = player1.getCenterX();
-				//yCenter = player1.getCenterY();   
-				//xCenter += 2;
 			}
 
 			paintBackground(g, background);

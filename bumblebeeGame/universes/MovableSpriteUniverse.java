@@ -16,6 +16,8 @@ public class MovableSpriteUniverse implements Universe {
 	private DisplayableSprite pointsTitle = null;
 	private DisplayableSprite cloud1 = null;
 	private DisplayableSprite cloud2 = null;
+	private DisplayableSprite pointsOnes = null;
+	private DisplayableSprite pointsTens = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();
 	private long elapsedTime = 0;
 	private String status = "";
@@ -42,6 +44,8 @@ public class MovableSpriteUniverse implements Universe {
 	pointsTitle = new PointsTitleSprite();
 	cloud1 = new CloudSprite(-1000, -50);
 	cloud2 = new CloudSprite(100, -15);
+	pointsOnes = new PointsSprite(1);
+	pointsTens = new PointsSprite(10);
 	sprites.add(cloud1);
 	sprites.add(cloud2);
 	sprites.add(player1);
@@ -53,6 +57,8 @@ public class MovableSpriteUniverse implements Universe {
 	sprites.add(press_rTitle);
 	sprites.add(start_gameTitle);
 	sprites.add(pointsTitle);
+	sprites.add(pointsOnes);
+	sprites.add(pointsTens);
 	
 	double speed = 1.5;
 	int minPoints = 0;

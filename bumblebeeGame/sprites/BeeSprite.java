@@ -137,18 +137,6 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 	public static void addPoint() {
 		points++;
 	}
-	
-	public String getName() {
-		//ideally this would call for user input then return that, but idk how so rn it's random
-		String[] names = {"Honey", "Honeycomb", "Nectar", "Sunny", "Honey suckle", "Sugar",
-								"Queen Bee", "Beatrice", "Wildflower",
-							"Tupelo", "Manuka", "Clover", "Orange Blossom", "Acacia", "Dandelion"};
-	    int min = -1;
-	    int max = names.length;
-	    double i;
-	    i = min + (Math.random() * (max - min));
-	    return names[(int) i];		
-	}
 
 	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
 		
@@ -198,7 +186,6 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			
 			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
 				gameOver = true;
-				Highscores.addNewHighscore(getName(), getPoints());
 			}
 			
 			WaspSprite.setPlayerX(centerX);
@@ -210,6 +197,9 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			GameOverTitleSprite.setVisible(true);
 			
 			if (displayScores) {
+				if (Highscores.getVisible() == false) {
+					Highscores.addNewHighscore(AnimationFrame.getUsername(), getPoints());
+				}
 				GameOverTitleSprite.setVisible(false);
 				Highscores.setVisible(true);
 				PressRTitleSprite.setVisible(true);
@@ -217,6 +207,7 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			} else {
 				if (keyboard.anyKeyDown()) {
 					displayScores = true;
+					AnimationFrame.getUser = true;
 				}
 			}
 
