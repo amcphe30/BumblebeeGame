@@ -6,8 +6,6 @@ public class MovableSpriteUniverse implements Universe {
 	private boolean gameOver = false;
 	private Background background = null;	
 	private DisplayableSprite player1 = null;
-	private DisplayableSprite wasp1 = null;
-	private DisplayableSprite wasp2 = null;
 	private DisplayableSprite flower = null;
 	private DisplayableSprite game_overTitle = null;
 	private DisplayableSprite highscoreTitle = null;
@@ -34,8 +32,6 @@ public class MovableSpriteUniverse implements Universe {
 	this.setYCenter(0);
 	background = new MappedBackground();
 	player1 = new BeeSprite();
-	wasp1 = new WaspSprite(1.5, 0);
-	wasp2 = new WaspSprite(2.0, 10);
 	flower = new FlowerSprite();
 	game_overTitle = new GameOverTitleSprite(-500, -100);
 	highscoreTitle = new HighScoreTitleSprite(0, -150);
@@ -49,8 +45,6 @@ public class MovableSpriteUniverse implements Universe {
 	sprites.add(cloud1);
 	sprites.add(cloud2);
 	sprites.add(player1);
-	sprites.add(wasp1);
-	sprites.add(wasp2);
 	sprites.add(flower);
 	sprites.add(game_overTitle);
 	sprites.add(highscoreTitle);
@@ -60,10 +54,10 @@ public class MovableSpriteUniverse implements Universe {
 	sprites.add(pointsOnes);
 	sprites.add(pointsTens);
 	
-	double speed = 1.5;
+	double speed = 1;
 	int minPoints = 0;
 	for (int i = 0; i < 10; i++) {
-		speed += 0.5;
+		speed += 0.1;
 		minPoints += 5;
 		sprites.add(new WaspSprite(speed, minPoints));
 	}

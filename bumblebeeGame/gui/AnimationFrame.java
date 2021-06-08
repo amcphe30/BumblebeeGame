@@ -94,13 +94,6 @@ public class AnimationFrame extends JFrame {
 		panel.setLayout(null);
 		panel.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		getContentPane().add(panel, BorderLayout.CENTER);	
-
-		lblPoints = new JLabel("000");
-		lblPoints.setForeground(Color.WHITE);
-		lblPoints.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblPoints.setBounds(950, 22, 48, 30);
-		//getContentPane().add(lblPoints);
-		//getContentPane().setComponentZOrder(lblPoints, 0);
 		
 		//highscores
 		

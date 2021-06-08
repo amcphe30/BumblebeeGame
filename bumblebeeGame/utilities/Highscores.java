@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Highscores {
@@ -17,6 +19,17 @@ public class Highscores {
 				scores.add(0);
 			}
 		}
+	
+	}
+	
+	public void serializeArrays() throws FileNotFoundException, IOException, Exception {
+		Serializer.serializeNames(names, "res/state/names");
+		Serializer.serializeScores(scores, "res/state/scores");
+	}
+	
+	public void deserializeArrays() throws ClassNotFoundException, IOException, Exception {
+		names = Serializer.deserializeNames("res/state/names");
+		scores = Serializer.deserializeScores("res/state/scores");
 	}
 	
 	public static void addNewHighscore(String name, int score) {
