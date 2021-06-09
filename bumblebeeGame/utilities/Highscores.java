@@ -12,29 +12,34 @@ public class Highscores {
 	public static void initializeArrays() {
 		
 		if (names == null) {
-			names = new ArrayList<String>();
-			scores = new ArrayList<Integer>();
-			for (int i = 0; i < MAXSCORES; i++) {
-				names.add("-----");
-				scores.add(0);
-			}
+			resetHighscores();
 		}
 	
 	}
 	
-	public void serializeArrays() throws FileNotFoundException, IOException, Exception {
-		Serializer.serializeNames(names, "res/state/names");
-		Serializer.serializeScores(scores, "res/state/scores");
+	public static void resetHighscores() {
+		names = new ArrayList<String>();
+		scores = new ArrayList<Integer>();
+		for (int i = 0; i < MAXSCORES; i++) {
+			names.add("-----");
+			scores.add(0);
+		}
 	}
 	
-	public void deserializeArrays() throws ClassNotFoundException, IOException, Exception {
-		names = Serializer.deserializeNames("res/state/names");
-		scores = Serializer.deserializeScores("res/state/scores");
+	public static void serializeArrays() throws FileNotFoundException, IOException, Exception {
+
+		Serializer.serializeNames(names, "res/names");
+		Serializer.serializeScores(scores, "res/scores");
 	}
 	
-	public static void addNewHighscore(String name, int score) {
+	public static void deserializeArrays() throws ClassNotFoundException, IOException, Exception {
 		
-		initializeArrays();		
+		initializeArrays();
+		names = Serializer.deserializeNames("res/names");
+		scores = Serializer.deserializeScores("res/scores");
+	}
+	
+	public static void addNewHighscore(String name, int score) {	
 		
 		for (int i = 0; i < MAXSCORES; i++) {
 			if (scores.get(i) < score) {
@@ -49,32 +54,26 @@ public class Highscores {
 	}
 	
 	public static String getHighscore(int i) {
-		String name = getName(i);
-		name = String.format("%-10s", name);
-		String score = String.valueOf(getScore(i));
-		score = String.format("%-3s", score);
+		String name = String.format("%-10s", getName(i));
+		String score = String.format("%3d", getScore(i));
 		
-		String highscore = name + " " + String.valueOf(score);
+		String highscore = name + " " + score;
 		return highscore;
 	}
 	
 	public ArrayList<String> getNames() {
-		initializeArrays();
 		return names;		
 	}
 	
 	public ArrayList<Integer> getScores() {
-		initializeArrays();
 		return scores;
 	}
 	
 	public static String getName(int x) {
-		initializeArrays();
 		return names.get(x);		
 	}
 	
 	public static int getScore(int x) {
-		initializeArrays();
 		return scores.get(x);
 	}
 	

@@ -29,7 +29,6 @@ public class AnimationFrame extends JFrame {
 	private double yCenter = 0;
 
 	private JPanel panel = null;	
-	private JLabel lblPoints;
 	private JLabel lblFirstPlace;
 	private JLabel lblSecondPlace;
 	private JLabel lblThirdPlace;
@@ -210,10 +209,7 @@ public class AnimationFrame extends JFrame {
 
 	}
 
-	private void updateControls() {
-		this.lblPoints.setText(String.valueOf(BeeSprite.getPoints()));
-		
-		//if 
+	private void updateControls() {		
 		
 		if (Highscores.getVisible()) {
 			this.lblFirstPlace.setText(Highscores.getHighscore(0));
@@ -248,8 +244,6 @@ public class AnimationFrame extends JFrame {
 		elapsed_time += actual_delta_time;
 
 	}
-
-
 
 	private void handleKeyboardInput() {
 
@@ -359,6 +353,11 @@ public class AnimationFrame extends JFrame {
 		}				
 	}
 	protected void this_windowClosing(WindowEvent e) {
+		try {
+			Highscores.serializeArrays();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		System.out.println("windowClosing()");
 		stop = true;
 		dispose();	

@@ -21,50 +21,59 @@ public class MovableSpriteUniverse implements Universe {
 	private String status = "";
 
 	private final double VELOCITY = 200;	
-	
-//	//require a separate list for sprites to be removed to avoid a concurence exception
+
+	//	//require a separate list for sprites to be removed to avoid a concurence exception
 	private ArrayList<DisplayableSprite> disposalList = new ArrayList<DisplayableSprite>();
 
-	
+
 	public MovableSpriteUniverse () {
-	
-	this.setXCenter(0);
-	this.setYCenter(0);
-	background = new MappedBackground();
-	player1 = new BeeSprite();
-	flower = new FlowerSprite();
-	game_overTitle = new GameOverTitleSprite(-500, -100);
-	highscoreTitle = new HighScoreTitleSprite(0, -150);
-	press_rTitle = new PressRTitleSprite(0, -100);
-	start_gameTitle = new StartGameTitleSprite(-500, -100);
-	pointsTitle = new PointsTitleSprite();
-	cloud1 = new CloudSprite(-1000, -50);
-	cloud2 = new CloudSprite(100, -15);
-	pointsOnes = new PointsSprite(1);
-	pointsTens = new PointsSprite(10);
-	sprites.add(cloud1);
-	sprites.add(cloud2);
-	sprites.add(player1);
-	sprites.add(flower);
-	sprites.add(game_overTitle);
-	sprites.add(highscoreTitle);
-	sprites.add(press_rTitle);
-	sprites.add(start_gameTitle);
-	sprites.add(pointsTitle);
-	sprites.add(pointsOnes);
-	sprites.add(pointsTens);
-	
-	double speed = 1;
-	int minPoints = 0;
-	for (int i = 0; i < 10; i++) {
-		speed += 0.1;
-		minPoints += 5;
-		sprites.add(new WaspSprite(speed, minPoints));
-	}
+
+		try {
+			//comment in and run once to reset highscore arrays
+			//Highscores.resetHighscores(); Highscores.serializeArrays();
+			Highscores.deserializeArrays();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		this.setXCenter(0);
+		this.setYCenter(0);
+		background = new MappedBackground();
+		player1 = new BeeSprite();
+		flower = new FlowerSprite();
+		game_overTitle = new GameOverTitleSprite(-500, -100);
+		highscoreTitle = new HighScoreTitleSprite(0, -150);
+		press_rTitle = new PressRTitleSprite(0, -100);
+		start_gameTitle = new StartGameTitleSprite(-500, -100);
+		pointsTitle = new PointsTitleSprite();
+		cloud1 = new CloudSprite(-1000, -50);
+		cloud2 = new CloudSprite(100, -15);
+		pointsOnes = new PointsSprite(1);
+		pointsTens = new PointsSprite(10);
+		sprites.add(cloud1);
+		sprites.add(cloud2);
+		sprites.add(player1);
+		sprites.add(flower);
+
+		double speed = 1;
+		int minPoints = 0;
+		for (int i = 0; i < 10; i++) {
+			sprites.add(new WaspSprite(speed, minPoints));
+			speed += 0.2;
+			minPoints += 5;
+		}
+		
+		sprites.add(game_overTitle);
+		sprites.add(highscoreTitle);
+		sprites.add(press_rTitle);
+		sprites.add(start_gameTitle);
+		sprites.add(pointsTitle);
+		sprites.add(pointsOnes);
+		sprites.add(pointsTens);
 
 	}
-	
-	
+
+
 	public double getScale() {
 		return 1;
 	}
@@ -76,13 +85,13 @@ public class MovableSpriteUniverse implements Universe {
 	public double getYCenter() {
 		return 0;
 	}
-	
+
 	public void setXCenter(double xCenter) {
 	}
 
 	public void setYCenter(double yCenter) {
 	}
-	
+
 	public boolean isComplete() {
 		return complete;
 	}
@@ -97,7 +106,7 @@ public class MovableSpriteUniverse implements Universe {
 	public DisplayableSprite getPlayer1() {
 		return player1;
 	}
-	
+
 	public DisplayableSprite getFlower() {
 		return flower;
 	}
@@ -105,28 +114,28 @@ public class MovableSpriteUniverse implements Universe {
 	public ArrayList<DisplayableSprite> getSprites() {
 		return sprites;
 	}
-		
+
 	public boolean centerOnPlayer() {
 		return false;
 	}	
-	
+
 	public boolean gameOver() {
 		return gameOver;
 	}
-	
+
 	public void update(KeyboardInput keyboard, long actual_delta_time) {
-		
+
 		if (keyboard.keyDownOnce(27)) {
 			complete = true;
 		}
-		
+
 		for (int i = 0; i < sprites.size(); i++) {
 			DisplayableSprite sprite = sprites.get(i);
 			sprite.update(this, keyboard, actual_delta_time);
-    	}
+		}
 
 	}
-	
+
 	public String toString() {
 		return this.status;
 	}
