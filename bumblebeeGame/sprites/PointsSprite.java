@@ -18,11 +18,11 @@ public class PointsSprite implements DisplayableSprite{
 
 		this.place = place;
 		if (place == 1) {
-			centerX = AnimationFrame.SCREEN_WIDTH / 2 - 20;
-			centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 40;
+			centerX = AnimationFrame.SCREEN_WIDTH / 2 - 60;
+			centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 52;
 		} else if (place == 10) {
-			centerX = AnimationFrame.SCREEN_WIDTH / 2 - 52;
-			centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 40;
+			centerX = AnimationFrame.SCREEN_WIDTH / 2 - 92;
+			centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 52;
 		}
 		
 		if (image == null) {

@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 public class PointsTitleSprite implements DisplayableSprite{
 	
 	private Image image = null;
-	private double centerX = AnimationFrame.SCREEN_WIDTH / 2 - 155;
-	private double centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 37;
+	private double centerX = AnimationFrame.SCREEN_WIDTH / 2 - 200;
+	private double centerY = AnimationFrame.SCREEN_HEIGHT / -2 + 50;
 	
 	public PointsTitleSprite() {
 

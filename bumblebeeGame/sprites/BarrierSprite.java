@@ -14,7 +14,7 @@ public class BarrierSprite implements DisplayableSprite {
 	private double height = 50;
 	private boolean dispose = false;	
 	
-	public BarrierSprite(double minX, double minY, double maxX, double maxY, boolean visible) {
+	public BarrierSprite(double minX, double minY, double maxX, double maxY) {
 		
 		if (image == null && visible) {
 			try {
@@ -29,7 +29,6 @@ public class BarrierSprite implements DisplayableSprite {
 		this.centerY = (minY + maxY) / 2;
 		this.width = maxX - minX;
 		this.height = maxY - minY;
-		this.visible = visible;
 		
 	}
 	

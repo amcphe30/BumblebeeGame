@@ -179,12 +179,17 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 			displayScores = false;
 		
 			deltaX = velocityX * actual_delta_time * 0.001;
-			centerX += deltaX;
-		
-			deltaY = velocityY * actual_delta_time * 0.001;
-			centerY += deltaY;
+			deltaY = velocityY * actual_delta_time * 0.001;	
 			
-			if (checkCollision(universe, "Wasp", 0, deltaY) == true) {
+			if (checkBarrierCollision(universe, deltaX, 0) == false) {
+				centerX += deltaX;
+			}
+			
+			if (checkBarrierCollision(universe, 0, deltaY) == false) {
+				centerY += deltaY;
+			}
+			
+			if (checkWaspCollision(universe, 0, deltaY) == true) {
 				gameOver = true;
 			}
 			
@@ -223,13 +228,12 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 		
 	}		
 	
-	public boolean checkCollision(Universe sprites, String instance, double deltaX, double deltaY) {
+	public boolean checkWaspCollision(Universe sprites, double deltaX, double deltaY) {
 		
 		boolean colliding = false;
 		
 		for (DisplayableSprite sprite : sprites.getSprites()) {
-			
-			if (instance == "Wasp") {
+					
 				if (sprite instanceof WaspSprite) {
 					if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
 							this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
@@ -238,6 +242,24 @@ public class BeeSprite implements DisplayableSprite, MovableSprite {
 						colliding = true;
 						break;					
 					}
+				}
+		}
+		return colliding;		
+	}
+	
+	public boolean checkBarrierCollision(Universe sprites, double deltaX, double deltaY) {
+		
+		boolean colliding = false;
+		
+		for (DisplayableSprite sprite : sprites.getSprites()) {
+			
+			if (sprite instanceof BarrierSprite) {
+				if (CollisionDetection.overlaps(this.getMinX() + deltaX, this.getMinY() + deltaY, 
+						this.getMaxX()  + deltaX, this.getMaxY() + deltaY, 
+						sprite.getMinX(),sprite.getMinY(), 
+						sprite.getMaxX(), sprite.getMaxY())) {
+					colliding = true;
+					break;
 				}
 			}
 		}

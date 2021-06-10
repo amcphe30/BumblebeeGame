@@ -4,30 +4,41 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class FlowerSprite implements DisplayableSprite, MovableSprite {
+public class FlowerSprite implements DisplayableSprite {
 	
-	//private static final int MAX = 300;
-	//private static final int MIN_Y = -300;
-	//private static final int MIN_X = 0;
-	private static Image image = null;
-	private double centerX = randomInt(0, 300);
-	private double centerY = randomInt(-300, 200);
-	private double width = 80;
-	private double height = 80;
+	private static Image[] image = null;
+	private final int FRAMES = 8;
+	private double centerX;
+	private double centerY;
+	private double width = 60;
+	private double height = 52;
 	private boolean visible = true;
 	private static boolean pollinated = false;
+	private int colour;
 	
 	public FlowerSprite() {
 		
+		newFlower();
+		
 		if (image == null) {
-			try {
-				image = ImageIO.read(new File("res/flower_pink-1.png"));
+			try {				
+				image = new Image[FRAMES];
+				for (int i = 0; i < FRAMES; i++) {
+					String path = String.format("res/flowers/flower-%d.png", i);
+					image[i] = ImageIO.read(new File(path));
+				}
 			}
 			catch (IOException e) {
 				System.out.println(e.toString());
 			}
 		}
 		
+	}
+	
+	private void newFlower() {
+		centerX = randomInt(AnimationFrame.SCREEN_WIDTH / 2 - 50, AnimationFrame.SCREEN_WIDTH / -2 + 50);
+		centerY = randomInt(AnimationFrame.SCREEN_HEIGHT / 2 - 50, AnimationFrame.SCREEN_HEIGHT / -2 + 50);
+		colour = randomInt(0, 7);
 	}
 	
 	public static boolean getPollination() {
@@ -42,20 +53,8 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 		this.centerY = centerY;		
 	}
 
-	public void moveX(double pixelsPerSecond) {
-		//unimplemented		
-	}
-
-	public void moveY(double pixelsPerSecond) {
-		//unimplemented		
-	}
-
-	public void stop() {
-		//unimplemented		
-	}
-
 	public Image getImage() {
-		return image;
+		return image[colour];
 	}
 
 	public boolean getVisible() {
@@ -120,8 +119,7 @@ public class FlowerSprite implements DisplayableSprite, MovableSprite {
 	}
 	
 	public void getNextFlower() {
-		centerX = randomInt(0, 300);
-		centerY = randomInt(-300, 300);
+		newFlower();
 		pollinated = false;
 	}
 	

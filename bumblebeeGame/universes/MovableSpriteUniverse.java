@@ -39,6 +39,8 @@ public class MovableSpriteUniverse implements Universe {
 		this.setXCenter(0);
 		this.setYCenter(0);
 		background = new MappedBackground();
+		ArrayList<DisplayableSprite> barriers = ((MappedBackground)background).getBarriers();
+		((MappedBackground) background).getBarriers();
 		player1 = new BeeSprite();
 		flower = new FlowerSprite();
 		game_overTitle = new GameOverTitleSprite(-500, -100);
@@ -70,6 +72,7 @@ public class MovableSpriteUniverse implements Universe {
 		sprites.add(pointsTitle);
 		sprites.add(pointsOnes);
 		sprites.add(pointsTens);
+		sprites.addAll(barriers);
 
 	}
 
