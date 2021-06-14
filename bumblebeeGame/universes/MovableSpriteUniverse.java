@@ -29,7 +29,7 @@ public class MovableSpriteUniverse implements Universe {
 	public MovableSpriteUniverse () {
 
 		try {
-			//comment in and run once to reset highscore arrays
+			//comment in and run once to reset high score arrays
 			//Highscores.resetHighscores(); Highscores.serializeArrays();
 			Highscores.deserializeArrays();
 		} catch (Exception e) {
